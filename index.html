@@ -330,8 +330,8 @@
     <div class="glow-sphere-3"></div>
   </div>
 
-  <!-- 固定浮動進度導覽列 HUD（在滾動時常駐頂部提供安全感） -->
-  <nav id="quiz-hud" aria-label="測驗進度導覽" class="fixed top-0 inset-x-0 z-40 bg-brand-bg/85 backdrop-blur-md transition-all duration-300 shadow-sm border border-brand-blue/20">
+  <!-- 固定浮動進度導覽列 HUD（頂部靜謐沉浸，滾動時優雅滑入常駐） -->
+  <nav id="quiz-hud" aria-label="測驗進度導覽" class="fixed top-0 inset-x-0 z-40 bg-brand-bg/90 backdrop-blur-md -translate-y-full opacity-0 pointer-events-none transition-all duration-500 shadow-sm border border-brand-blue/20">
     <div class="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <button id="btn-quiz-prev" type="button" aria-label="返回上一題" class="text-xs font-bold text-brand-sub hover:text-brand-navy px-3.5 py-1.5 rounded-xl hover:bg-brand-blue/15 active:scale-[0.98] transition-all disabled:opacity-30 disabled:pointer-events-none">
@@ -1410,15 +1410,27 @@
         });
       }
 
-      // Hero 內容滾動虛化監聽
+      // Hero 內容滾動虛化與 HUD 平滑滑入監聽（Checklist Design 沉浸引導）
       const heroInner = document.getElementById('hero-inner-content');
-      if (heroInner && typeof window.addEventListener === 'function') {
+      const quizHud = document.getElementById('quiz-hud');
+      if (typeof window.addEventListener === 'function') {
         window.addEventListener('scroll', () => {
           const scrollY = window.scrollY || window.pageYOffset || 0;
-          if (scrollY > 120) {
-            heroInner.classList.add('hero-blur-active');
-          } else {
-            heroInner.classList.remove('hero-blur-active');
+          if (heroInner) {
+            if (scrollY > 120) {
+              heroInner.classList.add('hero-blur-active');
+            } else {
+              heroInner.classList.remove('hero-blur-active');
+            }
+          }
+          if (quizHud) {
+            if (scrollY > 80) {
+              quizHud.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+              quizHud.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            } else {
+              quizHud.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+              quizHud.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            }
           }
         }, { passive: true });
       }
