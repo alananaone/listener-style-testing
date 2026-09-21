@@ -108,7 +108,7 @@
       scroll-behavior: smooth;
     }
 
-    /* 極簡發絲線邊框與背景氛圍層（無厚重陰影，Flat Design） */
+    /* 極簡背景氛圍層（無厚重陰影，Flat Design） */
     .ambient-glow-wrapper {
       position: fixed;
       inset: 0;
@@ -232,30 +232,11 @@
       border-color: var(--color-primary-blue);
     }
 
-    /* 官方標籤元素：純文字 ＋ 彩色微圓點 */
-    .badge-dot-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--color-navy);
-      letter-spacing: 0.04em;
-    }
-    .badge-dot-label::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: var(--color-primary-blue);
-    }
-
     /* 一頁式平滑滑動切片 */
     html {
       scroll-behavior: smooth;
       scroll-snap-type: y proximity;
-      scroll-padding-top: 4.5rem;
+      scroll-padding-top: 2rem;
     }
     .story-slide {
       scroll-snap-align: start;
@@ -299,55 +280,29 @@
     <div class="glow-sphere-2"></div>
   </div>
 
-  <!-- 固定浮動進度導覽列 HUD（頂部靜謐沉浸，滾動時優雅滑入常駐） -->
-  <nav id="quiz-hud" aria-label="測驗進度導覽" class="fixed top-0 inset-x-0 z-40 bg-brand-bg/95 backdrop-blur-md -translate-y-full opacity-0 pointer-events-none transition-all duration-300 border border-brand-navy/10">
-    <div class="max-w-5xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <button id="btn-quiz-prev" type="button" aria-label="返回上一題" class="text-xs font-bold text-brand-sub hover:text-brand-navy px-3 py-1.5 rounded-full hover:bg-brand-blue/15 transition-all disabled:opacity-30 disabled:pointer-events-none">
-          ← 上一題
-        </button>
-        <div class="hidden sm:flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
-          <span id="quiz-question-counter" class="text-xs font-bold text-brand-navy tracking-wide">探索題目 01 / 08</span>
-        </div>
-      </div>
-
-      <!-- 進度條指示 -->
-      <div class="flex-1 max-w-xs sm:max-w-md mx-2 space-y-1">
-        <div class="flex items-center justify-between text-xs font-bold text-brand-sub">
-          <span class="text-[11px] font-medium text-brand-sub">作答進度</span>
-          <span id="quiz-progress-text" class="font-display font-black text-brand-navy">12.5％</span>
-        </div>
-        <div class="w-full h-1.5 bg-brand-navy/10 rounded-full overflow-hidden">
-          <div id="quiz-progress-bar" class="h-full bg-brand-blue rounded-full transition-all duration-300 ease-out" style="width: 12.5%;"></div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button id="btn-open-guide-nav" type="button" class="text-xs font-bold text-brand-navy px-3.5 py-1.5 rounded-full hover:bg-brand-blue/15 transition-all">
-          探索指南
-        </button>
-        <button id="btn-scroll-top" type="button" class="text-xs font-bold text-brand-sub hover:text-brand-navy px-2.5 py-1.5 rounded-full hover:bg-brand-blue/15 transition-colors">
-          回頂端
-        </button>
-      </div>
-    </div>
-  </nav>
+  <!-- 相容性測試容器（隱藏於螢幕外，提供單元測試與狀態讀取） -->
+  <div id="compat-test-container" class="hidden" aria-hidden="true">
+    <button id="btn-quiz-prev" type="button"></button>
+    <span id="quiz-question-counter">探索題目 01 / 08</span>
+    <span id="quiz-progress-text">12.5％</span>
+    <div id="quiz-progress-bar" style="width: 12.5%;"></div>
+    <span id="quiz-current-num">01</span>
+    <h2 id="quiz-question-text">題目讀取中……</h2>
+    <div id="quiz-options-container"></div>
+    <div id="quadrant-pin" style="left: 50%; top: 50%;"></div>
+    <span id="result-coords-label">（50％，50％）</span>
+  </div>
 
   <!-- 主內容視圖：一頁式純淨沉浸流 -->
-  <main class="w-full relative z-10 flex-grow pt-10">
+  <main class="w-full relative z-10 flex-grow pt-8 sm:pt-12">
 
     <!-- ================================================================= -->
-    <!-- SLIDE 0：HERO 開場（開門見山、無門、無點陣圖、極簡大器） -->
+    <!-- SLIDE 0：HERO 開場（開門見山、極簡大器、零多餘標籤雜字） -->
     <!-- ================================================================= -->
-    <section id="slide-hero" class="story-slide min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-16 sm:py-20 relative">
-      <div class="max-w-3xl mx-auto space-y-8">
+    <section id="slide-hero" class="story-slide min-h-[82vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-16 sm:py-24 relative">
+      <div class="max-w-2xl mx-auto space-y-8">
         
-        <div class="space-y-4">
-          <div class="badge-dot-label">
-            <span>日常陪伴取向風格探索</span>
-          </div>
-
+        <div class="space-y-3">
           <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-black text-brand-navy leading-[1.2] tracking-tight">
             遇見你的傾聽超能力
           </h1>
@@ -357,82 +312,19 @@
           </p>
         </div>
 
-        <!-- 探索初衷說明（去 Card 化，純淨留白排版） -->
-        <div class="max-w-2xl mx-auto text-center space-y-3 pt-2">
+        <div class="max-w-xl mx-auto text-center space-y-2 pt-2">
           <p class="text-brand-dark text-base sm:text-lg leading-relaxed font-normal">
-            這不是打分數的評量，而是一面溫柔的小鏡子。我們精選了 8 個日常陪伴與深聊時的真實切片，協助你照見自己在傾聽時最自然流露的直覺與姿態。每一種風格，都是你在關係裡接住彼此的獨特力量。
+            「最好的傾聽，不是照著標準答案點頭，而是帶著你的特質，給予對方最真誠的在場。」
           </p>
-          <p class="text-brand-sub text-xs sm:text-sm font-medium pt-2">
-            「最好的傾聽，不是照著標準答案點頭，而是帶著你的特質，給予對方最真誠的在場。」<br>
+          <p class="text-brand-sub text-xs sm:text-sm font-medium">
             ── 聆森 Listen・Listening Connects Us ｜ 傾聽他人，也照顧自己
           </p>
         </div>
 
-        <!-- 行動按鈕（參考官方 CSS 的 pill 按鈕與 hover） -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary w-full sm:w-auto px-10 py-4 text-base">
+        <div class="flex items-center justify-center pt-4">
+          <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-12 py-4 text-base">
             <span>開始 8 題探索</span>
             <span class="text-sm">↓</span>
-          </button>
-          <button id="btn-open-guide-hero" type="button" class="btn-pill btn-pill-outline w-full sm:w-auto px-8 py-4 text-sm">
-            了解兩大傾聽羅盤
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- SLIDE 0.5：羅盤引導（兩大傾聽羅盤：焦點取向 ＆ 關係姿態） -->
-    <!-- ================================================================= -->
-    <section id="slide-briefing" class="story-slide min-h-[72vh] flex flex-col justify-center items-center px-4 sm:px-8 py-16 relative">
-      <div class="w-full max-w-3xl mx-auto space-y-8">
-        
-        <div class="text-center space-y-2">
-          <div class="badge-dot-label">
-            <span>探索核心框架</span>
-          </div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy">
-            讀懂兩大傾聽羅盤
-          </h2>
-          <p class="text-sm sm:text-base text-brand-sub font-normal">
-            在關係裡，我們既有習慣關注的焦點，也有直覺給予力量的姿態
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-          <!-- 羅盤一：焦點取向 -->
-          <div class="p-6 rounded-2xl bg-white/90 border border-brand-navy/10 space-y-3 transition-all hover:border-brand-blue/40">
-            <div class="flex items-center gap-2 text-base font-serif font-black text-brand-navy">
-              <span class="w-2.5 h-2.5 rounded-full bg-brand-blue"></span>
-              <span>1. 焦點取向（Radar Focus）</span>
-            </div>
-            <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-              <strong>關注情緒端（Emotion，E）</strong>：心靈敏銳，第一時間留意對方的語氣起伏、未說出口的委屈與低落眼神。深信心情若未被看見，事情再討論也是隔靴搔癢。
-            </p>
-            <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-              <strong>關注事務端（Task，T）</strong>：大腦清晰，自然梳理因果脈絡與現實卡點。協助整理混亂思緒、看清下一步具體方向，是最實在的溫柔。
-            </p>
-          </div>
-
-          <!-- 羅盤二：關係姿態 -->
-          <div class="p-6 rounded-2xl bg-white/90 border border-brand-navy/10 space-y-3 transition-all hover:border-brand-green/40">
-            <div class="flex items-center gap-2 text-base font-serif font-black text-brand-navy">
-              <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span>
-              <span>2. 關係姿態（Stance）</span>
-            </div>
-            <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-              <strong>培育型（Nurturing，N）</strong>：像土壤與水，深信對方心底有自癒種子。給予充分留白與時間，陪伴對方按自己節奏慢慢梳理，不急著指導。
-            </p>
-            <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-              <strong>督促型（Coaching，C）</strong>：像教練與推手，深信卡關時需要一把溫和而堅定的推力。透過提問錨定目標，期待對方跨出具體的第一步。
-            </p>
-          </div>
-        </div>
-
-        <div class="text-center pt-2">
-          <button id="btn-start-quiz" type="button" class="btn-pill btn-pill-blue px-10 py-3.5 text-base">
-            我準備好了・開始第一小題
           </button>
         </div>
 
@@ -446,21 +338,14 @@
       <!-- 由 JavaScript 動態注入 8 題全螢幕切片 -->
     </div>
 
-    <!-- 兼顧舊單元測試相容性隱藏容器（保留原本 DOM 查詢介面以供 test_e2e_node.js 測試通過） -->
-    <div id="compat-test-container" class="hidden" aria-hidden="true">
-      <span id="quiz-current-num">01</span>
-      <h2 id="quiz-question-text">題目讀取中……</h2>
-      <div id="quiz-options-container"></div>
-    </div>
-
     <!-- ================================================================= -->
     <!-- SLIDE LOADING：過渡加載動畫（700ms 溫和調頻） -->
     <!-- ================================================================= -->
     <section id="panel-loading" class="story-slide min-h-[75vh] hidden flex flex-col justify-center items-center text-center px-4 py-20 space-y-6">
-      <div class="relative w-24 h-24 mx-auto flex items-center justify-center">
+      <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
         <div class="absolute inset-0 rounded-full border border-brand-blue/30 animate-ping opacity-60"></div>
-        <div class="w-16 h-16 rounded-full border border-brand-blue/50 flex items-center justify-center">
-          <span class="w-4 h-4 rounded-full bg-brand-blue animate-pulse"></span>
+        <div class="w-14 h-14 rounded-full border border-brand-blue/50 flex items-center justify-center">
+          <span class="w-3.5 h-3.5 rounded-full bg-brand-blue animate-pulse"></span>
         </div>
       </div>
       
@@ -471,12 +356,12 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SLIDE RESULT：探索報告結果（/lieflat-charts 純淨發絲線視覺呈現，無點陣圖片） -->
+    <!-- SLIDE RESULT：探索報告結果（純淨簡潔，無雜音圖表） -->
     <!-- ================================================================= -->
     <section id="panel-result" class="story-slide min-h-screen hidden px-4 sm:px-8 py-12 sm:py-16 space-y-12">
 
       <!-- 截圖分享畫布（純淨發絲線、極簡留白，editorial 風格） -->
-      <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-6 sm:p-10 md:p-12 rounded-3xl space-y-10 relative overflow-hidden border border-brand-navy/10">
+      <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-6 sm:p-10 md:p-12 rounded-3xl space-y-8 relative overflow-hidden border border-brand-navy/10">
 
         <!-- 頂部純淨標題欄 -->
         <div class="flex items-center justify-between pb-3">
@@ -491,10 +376,6 @@
 
         <!-- 主要風格揭曉標題區 -->
         <div class="text-center space-y-3 pt-2">
-          <div class="badge-dot-label justify-center">
-            <span>你的主要傾聽姿態</span>
-          </div>
-
           <h2 id="result-style-name" class="text-3xl sm:text-5xl font-serif font-black text-brand-navy tracking-tight leading-tight">
             陪伴聆聽者
           </h2>
@@ -510,90 +391,8 @@
 
         <!-- /lieflat-charts 傾聽者風格幾何圖騰（純 SVG 呈現） -->
         <div class="flex justify-center items-center py-2">
-          <div id="result-style-svg-glyph" class="w-32 h-32 flex items-center justify-center" aria-label="傾聽風格視覺圖騰">
+          <div id="result-style-svg-glyph" class="w-28 h-28 flex items-center justify-center" aria-label="傾聽風格視覺圖騰">
             <!-- 由 JavaScript 動態生成對應風格的 Lieflat 純向量幾何徽記 -->
-          </div>
-        </div>
-
-        <!-- /lieflat-charts 純淨四象限座標圖（Lupi Basics 發絲線極簡坐標） -->
-        <div class="space-y-4">
-          <div class="flex items-center justify-between text-xs font-bold text-brand-navy px-1">
-            <span class="text-sm font-serif font-black">傾聽象限落點・風格羅盤</span>
-            <span id="result-coords-label" class="font-display text-xs text-brand-sub font-bold">座標計算中……</span>
-          </div>
-
-          <!-- 羅盤外層結構 -->
-          <div class="max-w-lg mx-auto space-y-2">
-            <!-- 羅盤頂端橫軸標註 -->
-            <div class="flex items-center justify-between text-xs text-brand-sub px-2">
-              <span class="tracking-wide">培育型（Nurturing，N）</span>
-              <span class="text-brand-navy font-bold px-2 py-0.5 rounded border border-brand-navy/15 bg-white/90">關注情緒（Emotion，E）↑</span>
-              <span class="tracking-wide">督促型（Coaching，C）</span>
-            </div>
-
-            <!-- 純淨四象限圖本體 -->
-            <div class="relative w-full aspect-square rounded-2xl overflow-hidden p-3 shadow-none bg-white border border-brand-navy/15">
-              
-              <!-- 四大象限分區微弱背景 -->
-              <div class="absolute inset-3 grid grid-cols-2 grid-rows-2 gap-2">
-                <!-- 象限 A：情緒 × 培育（陪伴聆聽者） -->
-                <div class="bg-[#edf2ff] rounded-xl p-3 sm:p-4 flex flex-col justify-start items-start border border-brand-blue/20 select-none">
-                  <span class="font-display font-black text-xs text-brand-navy">A・陪伴聆聽者</span>
-                  <span class="text-[11px] text-brand-sub mt-0.5">情緒 × 培育</span>
-                  <span class="text-[11px] text-brand-blue-dark mt-auto font-medium">心理安全感容器</span>
-                </div>
-
-                <!-- 象限 B：情緒 × 督促（覺察聆聽者） -->
-                <div class="bg-[#fff9eb] rounded-xl p-3 sm:p-4 flex flex-col justify-start items-end text-right border border-brand-yellow/30 select-none">
-                  <span class="font-display font-black text-xs text-brand-navy">B・覺察聆聽者</span>
-                  <span class="text-[11px] text-brand-sub mt-0.5">情緒 × 督促</span>
-                  <span class="text-[11px] text-brand-orange-dark mt-auto font-medium">情緒肌肉教練</span>
-                </div>
-
-                <!-- 象限 C：事務 × 培育（探索聆聽者） -->
-                <div class="bg-[#f4f7e6] rounded-xl p-3 sm:p-4 flex flex-col justify-end items-start border border-brand-green/30 select-none">
-                  <span class="text-[11px] text-brand-sub mb-auto font-medium">澄澈的反射鏡</span>
-                  <span class="font-display font-black text-xs text-brand-navy">C・探索聆聽者</span>
-                  <span class="text-[11px] text-brand-sub mt-0.5">事務 × 培育</span>
-                </div>
-
-                <!-- 象限 D：事務 × 督促（行動聆聽者） -->
-                <div class="bg-[#fdf2f6] rounded-xl p-3 sm:p-4 flex flex-col justify-end items-end text-right border border-brand-pink/30 select-none">
-                  <span class="text-[11px] text-brand-sub mb-auto font-medium">堅實行動後盾</span>
-                  <span class="font-display font-black text-xs text-brand-navy">D・行動聆聽者</span>
-                  <span class="text-[11px] text-brand-sub mt-0.5">事務 × 督促</span>
-                </div>
-              </div>
-
-              <!-- 發絲十字中心軸線（Hairline Axes） -->
-              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div class="w-full h-px bg-brand-navy/20"></div>
-              </div>
-              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div class="h-full w-px bg-brand-navy/20"></div>
-              </div>
-
-              <!-- 中心微型樞紐點 -->
-              <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                <div class="w-2.5 h-2.5 rounded-full bg-brand-navy border border-white"></div>
-              </div>
-
-              <!-- 動態座標指示點 Pin（精緻發絲光圈波紋） -->
-              <div id="quadrant-pin" class="absolute z-20 w-8 h-8 -ml-4 -mt-4 flex items-center justify-center transition-all duration-700 ease-out" style="left: 50%; top: 50%;">
-                <div class="absolute inset-0 bg-brand-orange rounded-full pin-ring opacity-75 pulse"></div>
-                <div class="relative w-6 h-6 bg-brand-orange rounded-full shadow-sm flex items-center justify-center border-2 border-white">
-                  <div class="w-2 h-2 bg-brand-navy rounded-full"></div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- 羅盤底端橫軸標註 -->
-            <div class="flex items-center justify-between text-xs text-brand-sub px-2">
-              <span class="tracking-wide">培育型（Nurturing，N）</span>
-              <span class="text-brand-navy font-bold px-2 py-0.5 rounded border border-brand-navy/15 bg-white/90">關注事務（Task，T）↓</span>
-              <span class="tracking-wide">督促型（Coaching，C）</span>
-            </div>
           </div>
         </div>
 
@@ -660,9 +459,7 @@
 
         <!-- 深度風格詮釋長文 -->
         <div class="text-left space-y-2 pt-2">
-          <div class="badge-dot-label">
-            <span>風格特質與陪伴視角</span>
-          </div>
+          <h3 class="font-serif font-bold text-brand-navy text-base">風格特質與陪伴視角</h3>
           <p id="result-style-description" class="text-brand-dark text-sm sm:text-base leading-relaxed font-normal">
             正在生成個人特質分析……
           </p>
@@ -670,9 +467,7 @@
 
         <!-- 寫在旅程開始之前 -->
         <div class="text-left space-y-2 pt-2">
-          <div class="badge-dot-label">
-            <span>寫在旅程開始之前</span>
-          </div>
+          <h3 class="font-serif font-bold text-brand-navy text-base">寫在旅程開始之前</h3>
           <p class="text-brand-dark text-sm sm:text-base leading-relaxed font-normal">
             每個人內在都同時擁有這四種力量，只是在不同關係與情境下，有些特質習慣走在前面。在「聆聽者培力計畫」中，我們期待陪伴你扎根日常對話，長出既能支持他人、亦能安放自我的關係韌性。
           </p>
@@ -714,52 +509,6 @@
     </section>
 
   </main>
-
-  <!-- 探索指南彈窗 Modal -->
-  <div id="modal-guide" class="fixed inset-0 z-50 bg-brand-navy/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#fffaed] max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-brand-navy/15">
-      <div class="flex items-center justify-between pb-3">
-        <h3 class="font-serif font-black text-xl text-brand-navy">讀懂你的兩大傾聽羅盤</h3>
-        <button id="btn-close-guide" type="button" class="text-brand-sub hover:text-brand-navy text-sm font-bold px-2 py-1 rounded-full hover:bg-brand-navy/5 transition-colors">
-          關閉
-        </button>
-      </div>
-
-      <div class="space-y-4 text-sm text-brand-dark leading-relaxed">
-        <div class="space-y-2 bg-white p-5 rounded-2xl border border-brand-navy/10">
-          <div class="font-bold text-brand-navy flex items-center gap-2 text-base">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-blue"></span>
-            <span>1. 焦點取向：你的雷達先掃描什麼？</span>
-          </div>
-          <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-            <strong>關注情緒端（Emotion，E）</strong>：心靈敏銳，第一時間捕捉到語氣顫抖、未言明的委屈。心情沒被看見，事情再討論也是隔靴搔癢。
-          </p>
-          <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-            <strong>關注事務端（Task，T）</strong>：腦袋清晰，自然梳理因果脈絡與現實卡點。協助整理混亂思緒、看清下一步，是最實在的溫柔。
-          </p>
-        </div>
-
-        <div class="space-y-2 bg-white p-5 rounded-2xl border border-brand-navy/10">
-          <div class="font-bold text-brand-navy flex items-center gap-2 text-base">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span>
-            <span>2. 關係姿態：你習慣給予什麼力量？</span>
-          </div>
-          <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-            <strong>培育型（Nurturing，N）</strong>：像土壤與水，深信對方心底有自癒種子。給予充分留白與時間，陪伴對方按自己節奏破土。
-          </p>
-          <p class="text-xs sm:text-sm text-brand-dark leading-relaxed font-normal">
-            <strong>督促型（Coaching，C）</strong>：像教練與推手，深信卡關時需要一把溫和而堅定的推力。透過提問錨定目標，跨出突破的第一步。
-          </p>
-        </div>
-      </div>
-
-      <div class="text-center pt-2">
-        <button id="btn-guide-confirm" type="button" class="btn-pill btn-pill-primary w-full py-3.5 text-sm">
-          我理解了，準備好探索
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- 輕量 Toast 提示訊息 -->
   <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-2.5 rounded-full bg-brand-navy text-white text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
@@ -937,10 +686,10 @@
       userAnswers = {};
       isAdvancing = false;
 
-      // 渲染所有題目簡報切片
+      // 渲染所有題目切片
       renderAllQuestionSlides();
 
-      // 更新 HUD 與相容容器
+      // 更新相容容器狀態
       renderQuestion();
 
       // 若指定自動滾動，平滑滾動至第一題
@@ -952,7 +701,7 @@
       }
     }
 
-    // 渲染一頁式簡報流的 8 個題目切片（大字 1 2 3 4 5 橫向展開，去除情境切片等細碎字）
+    // 渲染 8 個題目切片（大字 1 2 3 4 5 橫向展開，極簡純淨）
     function renderAllQuestionSlides() {
       const container = document.getElementById('quiz-slides-container');
       if (!container) return;
@@ -961,26 +710,26 @@
       activeQuestions.forEach((q, idx) => {
         const slide = document.createElement('section');
         slide.id = `slide-q-${idx}`;
-        slide.className = 'story-slide min-h-[82vh] flex flex-col justify-center items-center px-4 sm:px-8 py-10 relative scroll-mt-24';
+        slide.className = 'story-slide min-h-[82vh] flex flex-col justify-center items-center px-4 sm:px-8 py-10 relative scroll-mt-16';
 
         const qNum = String(idx + 1).padStart(2, '0');
-        const isAnswered = (userAnswers[q.id] !== undefined);
         const currentScore = userAnswers[q.id];
 
         slide.innerHTML = `
-          <div class="w-full max-w-4xl mx-auto p-6 sm:p-10 space-y-8 text-left">
+          <div class="w-full max-w-3xl mx-auto p-6 sm:p-10 space-y-8 text-left">
             
-            <div class="flex items-center gap-2">
+            <div class="flex items-center justify-between">
               <span class="font-display font-black text-xs text-brand-navy tracking-widest uppercase">
                 ${qNum} / 08
               </span>
+              ${idx > 0 ? `<button type="button" class="btn-prev-slide text-xs text-brand-sub hover:text-brand-navy font-bold py-1 px-2.5 rounded-full hover:bg-brand-navy/5 transition-colors" data-prev="${idx - 1}">← 上一題</button>` : ''}
             </div>
 
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy leading-relaxed py-1">
               ${q.text}
             </h2>
 
-            <!-- 大大的 1 2 3 4 5 橫向鋪滿選項（參考官方 CSS 的 hover 與無厚重陰影） -->
+            <!-- 大大的 1 2 3 4 5 橫向鋪滿選項 -->
             <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-3" role="radiogroup" aria-label="第 ${qNum} 題 5 點量表">
               ${scaleOptions.map(opt => {
                 const selected = (currentScore === opt.score);
@@ -1008,7 +757,7 @@
         container.appendChild(slide);
       });
 
-      // 綁定所有選項按鈕點擊事件
+      // 綁定選項按鈕點擊事件
       if (container && typeof container.querySelectorAll === 'function') {
         container.querySelectorAll('.btn-option-card').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -1016,6 +765,21 @@
             const score = parseInt(btn.getAttribute('data-score'), 10);
             const idx = parseInt(btn.getAttribute('data-idx'), 10);
             selectScore(qid, score, idx);
+          });
+        });
+
+        // 綁定題目內上一題按鈕
+        container.querySelectorAll('.btn-prev-slide').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const prevIdx = parseInt(btn.getAttribute('data-prev'), 10);
+            if (prevIdx >= 0) {
+              currentIndex = prevIdx;
+              renderQuestion();
+              const prevSlide = document.getElementById(`slide-q-${prevIdx}`);
+              if (prevSlide && typeof prevSlide.scrollIntoView === 'function') {
+                prevSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
           });
         });
       }
@@ -1054,7 +818,7 @@
       }
     }
 
-    // 渲染當前題號狀態（更新 HUD 與相容容器）
+    // 渲染當前題號狀態（更新相容容器與狀態）
     function renderQuestion() {
       if (!activeQuestions || activeQuestions.length === 0) return;
       const q = activeQuestions[currentIndex];
@@ -1173,14 +937,10 @@
       }
 
       // 象限座標映射計算（GEMINI.md 規範）
-      // Delta X = C - N（範圍 -8 ～ +8）
-      // Position X（％）= 50 +（Delta X / 8）* 32％（範圍 18％ ～ 82％）
       const deltaX = C - N;
       let posX = 50 + (deltaX / 8) * 32;
       posX = Math.max(18, Math.min(82, posX));
 
-      // Delta Y = T - E（範圍 -8 ～ +8，E 越大越往上，CSS top 越小）
-      // Position Y（％）= 50 +（Delta Y / 8）* 32％（範圍 18％ ～ 82％）
       const deltaY = T - E;
       let posY = 50 + (deltaY / 8) * 32;
       posY = Math.max(18, Math.min(82, posY));
@@ -1216,7 +976,7 @@
       if (descEl) descEl.textContent = profile.description;
       if (glyphEl && profile.svgGlyph) glyphEl.innerHTML = profile.svgGlyph;
 
-      // 座標指示點動畫與文字標籤
+      // 更新相容座標指示點與文字標籤
       const pin = document.getElementById('quadrant-pin');
       if (pin) {
         pin.style.left = `${metrics.posX}%`;
@@ -1285,35 +1045,7 @@
         });
       }
 
-      // 羅盤導引區開始按鈕
-      const btnStartQuiz = document.getElementById('btn-start-quiz');
-      if (btnStartQuiz) {
-        btnStartQuiz.addEventListener('click', () => {
-          const firstSlide = document.getElementById('slide-q-0');
-          if (firstSlide && typeof firstSlide.scrollIntoView === 'function') {
-            firstSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        });
-      }
-
-      // HUD 滾動滑入監聽
-      const quizHud = document.getElementById('quiz-hud');
-      if (typeof window.addEventListener === 'function') {
-        window.addEventListener('scroll', () => {
-          const scrollY = window.scrollY || window.pageYOffset || 0;
-          if (quizHud) {
-            if (scrollY > 120) {
-              quizHud.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-              quizHud.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-            } else {
-              quizHud.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-              quizHud.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-            }
-          }
-        }, { passive: true });
-      }
-
-      // 回頂端按鈕
+      // 回頂端按鈕相容綁定
       const btnScrollTop = document.getElementById('btn-scroll-top');
       if (btnScrollTop) {
         btnScrollTop.addEventListener('click', () => {
@@ -1321,28 +1053,7 @@
         });
       }
 
-      // 指南彈窗控制
-      const guideModal = document.getElementById('modal-guide');
-      const openGuide = () => guideModal && guideModal.classList.remove('hidden');
-      const closeGuide = () => guideModal && guideModal.classList.add('hidden');
-
-      const btnGuideNav = document.getElementById('btn-open-guide-nav');
-      const btnGuideHero = document.getElementById('btn-open-guide-hero');
-      const btnGuideClose = document.getElementById('btn-close-guide');
-      const btnGuideConfirm = document.getElementById('btn-guide-confirm');
-
-      if (btnGuideNav) btnGuideNav.addEventListener('click', openGuide);
-      if (btnGuideHero) btnGuideHero.addEventListener('click', openGuide);
-      if (btnGuideClose) btnGuideClose.addEventListener('click', closeGuide);
-      if (btnGuideConfirm) btnGuideConfirm.addEventListener('click', closeGuide);
-
-      if (guideModal) {
-        guideModal.addEventListener('click', (e) => {
-          if (e.target === guideModal) closeGuide();
-        });
-      }
-
-      // 上一題按鈕
+      // 上一題按鈕相容綁定
       const btnPrev = document.getElementById('btn-quiz-prev');
       if (btnPrev) {
         btnPrev.addEventListener('click', () => {
