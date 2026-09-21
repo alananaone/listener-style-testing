@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>遇見你的傾聽超能力：日常陪伴取向風格探索 ｜ 聆森 Listenfy</title>
+  <title>紙杯電話傳聲旅程：傾聽超能力遊戲探索 ｜ 聆森 Listenfy</title>
   
   <!-- 字型引入：英數字 Plus Jakarta Sans，繁體中文思源宋體 Noto Serif TC 與 Noto Sans TC -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,17 +234,6 @@
       border: 1px solid var(--color-primary-blue);
     }
 
-    /* 一頁式平滑滑動切片 */
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
-      scroll-padding-top: 2rem;
-    }
-    .story-slide {
-      scroll-snap-align: start;
-      scroll-snap-stop: normal;
-    }
-
     /* 無障礙焦點樣式 */
     a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
       outline: 2px solid var(--color-primary-blue);
@@ -275,7 +264,93 @@
     }
 
     /* ================================================================= */
-    /* FlipCard 3D 物理傾斜翻轉卡片樣式（feitangyuan/motion-web 高手感規範） */
+    /* 1. FoldText 3D 摺紙進場文字樣式（feitangyuan/motion-web 規範） */
+    /* ================================================================= */
+    .fold-text-container {
+      display: inline-block;
+      perspective: 700px;
+      text-wrap: balance;
+    }
+    .fold-text-char {
+      display: inline-block;
+      transform-style: preserve-3d;
+      perspective: 700px;
+      position: relative;
+    }
+    .fold-text-inner {
+      display: inline-block;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      opacity: 0;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+      position: relative;
+    }
+    .fold-text-crease {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(38, 47, 107, 0.55) 0%, transparent 80%);
+      opacity: 1;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fold-text-revealed .fold-text-inner {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    .fold-text-revealed .fold-text-crease {
+      opacity: 0;
+    }
+
+    /* ================================================================= */
+    /* 2. SlingButton 彈力彈射互動樣式 */
+    /* ================================================================= */
+    .sling-well {
+      width: 140px;
+      height: 140px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(38, 47, 107, 0.08) 0%, rgba(38, 47, 107, 0.02) 65%, transparent 70%);
+      border: 1px solid rgba(38, 47, 107, 0.12);
+      position: relative;
+      touch-action: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sling-pad {
+      width: 58px;
+      height: 58px;
+      border-radius: 9999px;
+      background-color: #fffaed;
+      border: 2px solid #262f6b;
+      box-shadow: 0 4px 14px rgba(38, 47, 107, 0.16);
+      cursor: grab;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.08s ease-out, box-shadow 0.2s ease;
+      z-index: 10;
+    }
+    .sling-pad:active {
+      cursor: grabbing;
+      box-shadow: 0 2px 8px rgba(38, 47, 107, 0.22);
+    }
+    .sling-pad:hover {
+      border-color: #ff7d59;
+    }
+
+    /* ================================================================= */
+    /* 3. 橫向長廊遊戲探索（Side-scrolling Game World） */
+    /* ================================================================= */
+    .game-track-wrapper {
+      position: relative;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* ================================================================= */
+    /* 4. FlipCard 3D 物理傾斜翻轉卡片樣式 */
     /* ================================================================= */
     .flip-card-perspective {
       perspective: 1100px;
@@ -348,11 +423,11 @@
         <path d="M 8 16 C 8 10 12 6 16 6 C 20 6 24 10 24 16 C 24 22 20 26 16 26 C 12 26 8 22 8 16 Z" fill="#8fadff" fill-opacity="0.3" stroke="#262f6b" stroke-width="2"/>
         <path d="M 12 16 C 12 12 14 9 16 9 C 18 9 20 12 20 16 C 20 20 18 23 16 23 C 14 23 12 20 12 16 Z" fill="#ff7d59" stroke="#262f6b" stroke-width="1.8"/>
       </svg>
-      <span class="font-display font-black text-sm tracking-tight">Listenfy 傾聽超能力探索</span>
+      <span class="font-display font-black text-sm tracking-tight">Listenfy 傾聽超能力・紙杯電話遊戲版</span>
     </div>
     <div>
-      <a href="game.html" class="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-bold text-brand-navy rounded-full bg-white border border-brand-navy/15 hover:bg-brand-blue/10 hover:border-brand-blue active:scale-95 transition-all" aria-label="前往紙杯電話遊戲互動版">
-        <span>切換至紙杯電話遊戲版</span>
+      <a href="index.html" class="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-bold text-brand-navy rounded-full bg-white border border-brand-navy/15 hover:bg-brand-blue/10 hover:border-brand-blue active:scale-95 transition-all" aria-label="返回經典探索版">
+        <span>切換至經典探索版</span>
         <span class="text-xs">→</span>
       </a>
     </div>
@@ -371,35 +446,48 @@
     <span id="result-coords-label">（50％，50％）</span>
   </div>
 
-  <!-- 主內容視圖：一頁式極簡垂直切片探索 -->
-  <main class="w-full relative z-10 flex-grow pt-4 sm:pt-8">
+  <!-- 主內容視圖：紙杯電話彈射 ＋ 橫向長廊遊戲探索 -->
+  <main class="w-full relative z-10 flex-grow pt-4 sm:pt-6">
 
     <!-- ================================================================= -->
-    <!-- SLIDE 0：HERO 開場（開門見山、極簡典雅的一頁式垂直探索） -->
+    <!-- SLIDE 0：HERO 開場（紙杯電話傳聲絲線意象 ＋ 3D 摺紙標題 ＋ 彈射按鈕） -->
     <!-- ================================================================= -->
-    <section id="slide-hero" class="story-slide min-h-[82vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-16 sm:py-24 relative">
+    <section id="slide-hero" class="min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-10 sm:py-16 relative">
       <div class="max-w-2xl mx-auto space-y-8">
         
-        <!-- 頂部幾何雙子圖騰（純向量 SVG 呈現） -->
-        <div class="w-16 h-16 mx-auto flex items-center justify-center" aria-label="聆森雙子圖騰">
-          <svg viewBox="0 0 64 64" class="w-full h-full" fill="none">
-            <circle cx="26" cy="32" r="18" fill="#8fadff" fill-opacity="0.35" stroke="#262f6b" stroke-width="2.5"/>
-            <circle cx="38" cy="32" r="18" fill="#ffde94" fill-opacity="0.5" stroke="#262f6b" stroke-width="2.5"/>
-            <path d="M 32 18 C 36 24 36 40 32 46 C 28 40 28 24 32 18 Z" fill="#ff7d59" stroke="#262f6b" stroke-width="2"/>
+        <!-- 頂部紙杯電話傳聲絲線意象圖騰（純向量 SVG 呈現） -->
+        <div class="w-full max-w-md mx-auto flex items-center justify-center py-2" aria-label="紙杯電話傳聲意象">
+          <svg viewBox="0 0 340 70" class="w-full h-auto" fill="none" stroke="currentColor">
+            <!-- 左紙杯 發話端 -->
+            <path d="M 30 15 L 65 24 L 65 46 L 30 55 Z" fill="#fffaed" stroke="#262f6b" stroke-width="2"/>
+            <ellipse cx="65" cy="35" rx="5" ry="11" fill="#8fadff" fill-opacity="0.4" stroke="#262f6b" stroke-width="1.8"/>
+            <ellipse cx="30" cy="35" rx="4" ry="20" fill="#ffde94" stroke="#262f6b" stroke-width="2"/>
+            <!-- 緊繃傳聲絲線與微細聲波 -->
+            <line x1="65" y1="35" x2="275" y2="35" stroke="#8fadff" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M 120 35 Q 130 28 140 35 Q 150 42 160 35" stroke="#ff7d59" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M 180 35 Q 190 28 200 35 Q 210 42 220 35" stroke="#d9de81" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- 絲線中央光點精靈 -->
+            <circle cx="170" cy="35" r="4.5" fill="#ff7d59"/>
+            <circle cx="170" cy="35" r="9" stroke="#ff7d59" stroke-width="1" opacity="0.6" stroke-dasharray="2 2"/>
+            <!-- 右紙杯 聆聽端 -->
+            <path d="M 310 15 L 275 24 L 275 46 L 310 55 Z" fill="#fffaed" stroke="#262f6b" stroke-width="2"/>
+            <ellipse cx="275" cy="35" rx="5" ry="11" fill="#8fadff" fill-opacity="0.4" stroke="#262f6b" stroke-width="1.8"/>
+            <ellipse cx="310" cy="35" rx="4" ry="20" fill="#f4a7c3" stroke="#262f6b" stroke-width="2"/>
           </svg>
         </div>
 
         <div class="space-y-3">
-          <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-black text-brand-navy leading-[1.2] tracking-tight">
+          <!-- 3D 摺紙立體進場大標題（FoldText 演算法動態注入） -->
+          <div id="hero-fold-title" class="fold-text-container text-3xl sm:text-5xl md:text-6xl font-serif font-black text-brand-navy leading-[1.25] tracking-tight">
             遇見你的傾聽超能力
-          </h1>
+          </div>
 
           <p class="text-brand-sub text-base sm:text-xl font-normal max-w-xl mx-auto leading-relaxed">
-            日常陪伴取向風格探索
+            日常陪伴取向風格探索・紙杯電話傳聲旅程
           </p>
         </div>
 
-        <div class="max-w-xl mx-auto text-center space-y-2 pt-2">
+        <div class="max-w-xl mx-auto text-center space-y-2 pt-1">
           <p class="text-brand-dark text-base sm:text-lg leading-relaxed font-normal">
             「最好的傾聽，不是照著標準答案點頭，而是帶著你的特質，給予對方最真誠的在場。」
           </p>
@@ -408,33 +496,139 @@
           </p>
         </div>
 
-        <div class="max-w-lg mx-auto text-center pt-1">
+        <div class="max-w-lg mx-auto text-center">
           <p class="text-brand-sub text-xs sm:text-sm leading-relaxed">
-            這不是一場給予分數的臨床診斷，而是一面照見日常陪伴姿態與直覺溫度的溫柔小鏡子。給出你最真實的直覺，照見屬於你的傾聽特質與心理安全感。
+            拉扯紙杯傳聲線，發射聲波光點！光點將沿著絲線前進，依序觸發 8 個對話驛站，陪你照見心理安全感容器。
           </p>
         </div>
 
-        <div class="flex items-center justify-center pt-4">
-          <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-12 py-4 text-base">
-            <span>開始 8 題探索</span>
-            <span class="text-sm">↓</span>
-          </button>
+        <!-- 紙杯電話 SlingButton 彈力彈射互動座 -->
+        <div class="flex flex-col items-center justify-center space-y-4 pt-2">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-brand-navy block">拉動紙杯傳聲線・彈射啟程</span>
+            <span class="text-xs text-brand-sub block font-normal">向後拖拽彈力繩發射，或點選下方按鈕直接開始</span>
+          </div>
+
+          <!-- 彈弓本體 -->
+          <div id="hero-sling-launcher" class="sling-well" role="button" tabindex="0" aria-label="拉動彈弓彈射進入測驗">
+            <svg id="sling-svg-canvas" class="w-full h-full absolute inset-0 pointer-events-none" viewBox="0 0 140 140">
+              <!-- 動態彈力絲線 -->
+              <path id="sling-band-left" d="M 28 70 Q 45 70 70 70" stroke="#8fadff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <path id="sling-band-right" d="M 112 70 Q 95 70 70 70" stroke="#8fadff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <!-- 兩側固定栓 -->
+              <circle cx="28" cy="70" r="5" fill="#262f6b"/>
+              <circle cx="112" cy="70" r="5" fill="#262f6b"/>
+            </svg>
+            <!-- 彈射手柄 Pad -->
+            <div id="sling-pull-pad" class="sling-pad">
+              <svg viewBox="0 0 24 24" class="w-6 h-6 text-brand-navy" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-10 py-3.5 text-base">
+              <span>直接開始 8 題探索</span>
+              <span class="text-sm">→</span>
+            </button>
+          </div>
         </div>
 
       </div>
     </section>
 
     <!-- ================================================================= -->
-    <!-- SLIDES 1 ~ 8：動態題目串流（垂直平滑流動，極簡無雜音） -->
+    <!-- SLIDES 1 ~ 8：橫向遊戲探索長廊（光點角色沿傳聲絲線前進） -->
     <!-- ================================================================= -->
-    <div id="quiz-slides-container" class="space-y-12 sm:space-y-16 pb-20">
-      <!-- 由 JavaScript 動態注入 8 題垂直切片 -->
-    </div>
+    <section id="quiz-game-section" class="w-full min-h-[90vh] hidden flex-col justify-between py-6 relative">
+      
+      <!-- 頂部傳聲羅盤 HUD 導航列 -->
+      <div class="w-full max-w-4xl mx-auto px-4 flex items-center justify-between z-20 pb-4">
+        <div class="flex items-center gap-2 text-xs font-bold text-brand-navy">
+          <span class="w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse"></span>
+          <span>傳聲絲線連線中</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="btn-game-prev" type="button" class="btn-pill btn-pill-outline text-xs px-4 py-1.5 disabled:opacity-30 disabled:pointer-events-none" disabled>
+            ← 上一個情境
+          </button>
+          <span id="game-progress-badge" class="text-xs font-display font-black text-brand-navy px-3 py-1 rounded-full border border-brand-navy/15 bg-white">
+            01 / 08
+          </span>
+        </div>
+      </div>
+
+      <!-- 紙杯電話傳聲實體繩索裝置（Verlet 繩索物理 ＋ 兩端紙杯） -->
+      <div class="w-full max-w-4xl mx-auto px-4 py-2 z-20">
+        <div class="flex items-center justify-between gap-2 sm:gap-4 p-3 rounded-2xl bg-white border border-brand-navy/15 shadow-sm">
+          <!-- 左紙杯 發話端 -->
+          <div class="flex-shrink-0 flex items-center gap-2">
+            <svg viewBox="0 0 36 36" class="w-8 h-8 flex-shrink-0" fill="none" stroke="currentColor">
+              <path d="M 6 8 L 26 12 L 26 24 L 6 28 Z" fill="#fffaed" stroke="#262f6b" stroke-width="1.8"/>
+              <ellipse cx="26" cy="18" rx="3" ry="6" fill="#8fadff" fill-opacity="0.4" stroke="#262f6b" stroke-width="1.5"/>
+              <ellipse cx="6" cy="18" rx="2.5" ry="10" fill="#ffde94" stroke="#262f6b" stroke-width="1.6"/>
+            </svg>
+            <div class="hidden sm:block text-left">
+              <span class="text-xs font-bold text-brand-navy block leading-none">發話端</span>
+              <span class="text-xs text-brand-sub block mt-0.5">你的在場</span>
+            </div>
+          </div>
+
+          <!-- 中央 Verlet 傳聲物理繩索 Canvas -->
+          <div class="flex-grow relative h-14 flex items-center">
+            <canvas id="cup-string-canvas" class="w-full h-full block cursor-pointer" title="輕觸或撥動傳聲絲線可產生實體弦波震動"></canvas>
+            <div class="absolute left-1/2 -translate-x-1/2 bottom-0 text-xs text-brand-sub font-medium pointer-events-none opacity-60">
+              傳聲絲線具實體弦震・隨答題波長傳遞
+            </div>
+          </div>
+
+          <!-- 右紙杯 聆聽端 -->
+          <div id="receiver-cup-container" class="flex-shrink-0 flex items-center gap-2 transition-transform duration-300">
+            <div class="hidden sm:block text-right">
+              <span class="text-xs font-bold text-brand-navy block leading-none">聆聽端</span>
+              <span class="text-xs text-brand-sub block mt-0.5">深層理解</span>
+            </div>
+            <svg viewBox="0 0 36 36" class="w-8 h-8 flex-shrink-0" fill="none" stroke="currentColor">
+              <path d="M 30 8 L 10 12 L 10 24 L 30 28 Z" fill="#fffaed" stroke="#262f6b" stroke-width="1.8"/>
+              <ellipse cx="10" cy="18" rx="3" ry="6" fill="#8fadff" fill-opacity="0.4" stroke="#262f6b" stroke-width="1.5"/>
+              <ellipse cx="30" cy="18" rx="2.5" ry="10" fill="#f4a7c3" stroke="#262f6b" stroke-width="1.6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 驛站長廊進度微縮尺規 -->
+      <div class="w-full max-w-4xl mx-auto px-4 py-1 z-20">
+        <div class="flex items-center justify-between text-xs text-brand-sub font-bold px-1">
+          <span>驛站探索 01</span>
+          <div class="flex-grow mx-4 relative flex items-center justify-between">
+            <div class="absolute inset-0 top-1/2 -translate-y-1/2 h-1 bg-brand-navy/10 rounded-full"></div>
+            <div id="game-track-progress-fill" class="absolute top-1/2 -translate-y-1/2 h-1 bg-brand-blue rounded-full transition-all duration-300" style="width: 12.5%;"></div>
+          </div>
+          <span>驛站探索 08</span>
+        </div>
+      </div>
+
+      <!-- 橫向卡片滾動舞台 -->
+      <div class="game-track-wrapper flex-grow flex items-center py-6">
+        <div id="quiz-slides-container" class="w-full flex transition-transform duration-500 ease-out">
+          <!-- 由 JavaScript 動態注入 8 題橫向切片 -->
+        </div>
+      </div>
+
+      <!-- 底部提示文字 -->
+      <div class="w-full text-center py-2 text-xs text-brand-sub font-medium z-20">
+        點選選項後，光點將帶著你的直覺答案沿著絲線滑向下一站
+      </div>
+
+    </section>
 
     <!-- ================================================================= -->
     <!-- SLIDE LOADING：過渡加載動畫（700ms 溫和調頻） -->
     <!-- ================================================================= -->
-    <section id="panel-loading" class="story-slide min-h-[75vh] hidden flex-col justify-center items-center text-center px-4 py-20 space-y-6">
+    <section id="panel-loading" class="min-h-[75vh] hidden flex-col justify-center items-center text-center px-4 py-20 space-y-6">
       <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
         <div class="absolute inset-0 rounded-full border border-brand-blue/30 animate-ping opacity-60"></div>
         <div class="w-14 h-14 rounded-full border border-brand-blue/50 flex items-center justify-center">
@@ -443,38 +637,37 @@
       </div>
       
       <div class="space-y-2 max-w-md mx-auto">
-        <h3 class="text-2xl font-serif font-black text-brand-navy">正在為你梳理傾聽羅盤……</h3>
+        <h3 id="loading-fold-title" class="fold-text-container text-2xl font-serif font-black text-brand-navy">正在為你梳理傾聽羅盤……</h3>
         <p class="text-sm text-brand-sub font-normal">深呼吸，照見日常陪伴裡的直覺姿態與特質光芒</p>
       </div>
     </section>
 
     <!-- ================================================================= -->
-    <!-- SLIDE RESULT：探索報告結果（FlipCard 3D 翻轉卡 ＋ 純淨發絲線指標） -->
+    <!-- SLIDE RESULT：遊戲過關結算（FlipCard 3D 翻轉卡 ＋ 羅盤象限圖） -->
     <!-- ================================================================= -->
-    <section id="panel-result" class="story-slide min-h-screen hidden px-4 sm:px-8 py-12 sm:py-16 space-y-12">
+    <section id="panel-result" class="min-h-screen hidden px-4 sm:px-8 py-10 sm:py-16 space-y-12">
 
       <!-- 截圖分享畫布（純淨發絲線、極簡留白，editorial 風格） -->
       <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-6 sm:p-10 md:p-12 rounded-3xl space-y-8 relative overflow-hidden border border-brand-navy/15">
 
         <!-- 頂部純淨標題欄 -->
-        <div class="flex items-center justify-between pb-3">
+        <div class="flex items-center justify-between pb-2">
           <div class="text-left">
             <span class="font-display font-black text-lg text-brand-navy tracking-tight block">Listenfy 傾聽超能力探索</span>
             <span class="text-xs text-brand-sub block mt-0.5">聆森 Listen・Listening Connects Us</span>
           </div>
           <div class="text-xs font-bold text-brand-navy px-3 py-1 rounded-full border border-brand-navy/15 bg-white">
-            風格探索報告
+            遊戲通關報告
           </div>
         </div>
 
-        <!-- 報告核心引言 -->
-        <div class="text-center space-y-2 pt-1">
-          <span class="text-xs font-bold tracking-widest text-brand-navy/60 uppercase block">探索結果揭曉</span>
-          <h2 class="text-2xl sm:text-4xl font-serif font-black text-brand-navy tracking-tight">
-            你的傾聽超能力羅盤
-          </h2>
-          <p class="text-xs sm:text-sm text-brand-sub max-w-md mx-auto">
-            輕觸卡片可 3D 翻轉查看深度特質解讀與心靈處方箋
+        <!-- 報告核心大標題（FoldText 演算法動態摺紙呈現） -->
+        <div class="text-center pt-2">
+          <div id="result-fold-title" class="fold-text-container text-2xl sm:text-4xl font-serif font-black text-brand-navy tracking-tight">
+            探索通關・羅盤覺醒
+          </div>
+          <p class="text-xs sm:text-sm text-brand-sub mt-2 max-w-md mx-auto">
+            你已完成 8 個傳聲驛站的長廊探索，輕觸卡片可 3D 物理傾斜並翻轉查看深度特質解讀
           </p>
         </div>
 
@@ -509,7 +702,7 @@
               </div>
             </div>
 
-            <!-- 卡片背面：深度特質解讀、陪伴姿態、盲點覺察與處方箋 -->
+            <!-- 卡片背面：深度特質解讀、陪伴姿態、盲點覺察 -->
             <div class="flip-card-face flip-card-back shadow-lg">
               <div id="glare-back" class="flip-card-glare"></div>
 
@@ -658,24 +851,24 @@
         <!-- 報告分享與重測按鈕群 -->
         <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
           <button id="btn-save-image" type="button" class="btn-pill btn-pill-primary text-sm px-6 py-3">
-            <span>保存風格圖卡</span>
+            <span>保存通關圖卡</span>
           </button>
           <button id="btn-copy-result" type="button" class="btn-pill btn-pill-outline text-sm px-6 py-3">
-            <span>複製分析金句</span>
+            <span>複製通關金句</span>
           </button>
           <button id="btn-retake-quiz" type="button" class="btn-pill btn-pill-outline text-sm px-6 py-3">
-            <span>重新探索</span>
+            <span>再玩一次</span>
           </button>
         </div>
 
         <!-- 跨版本切換導流卡片 -->
         <div class="p-5 rounded-2xl bg-white border border-brand-navy/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
-            <span class="text-xs font-bold text-brand-navy block">想體驗紙杯電話互動遊戲嗎？</span>
-            <span class="text-xs text-brand-sub block mt-0.5">拉扯傳聲繩索、彈射聲波光點，在橫向長廊中探索 8 個對話切片。</span>
+            <span class="text-xs font-bold text-brand-navy block">想以經典垂直切片方式瀏覽嗎？</span>
+            <span class="text-xs text-brand-sub block mt-0.5">開門見山的一頁式垂直滾動探索，沉靜閱讀每一個陪伴日常。</span>
           </div>
-          <a href="game.html" class="btn-pill btn-pill-blue text-xs px-5 py-2.5 flex-shrink-0">
-            <span>前往遊戲互動版</span>
+          <a href="index.html" class="btn-pill btn-pill-blue text-xs px-5 py-2.5 flex-shrink-0">
+            <span>前往經典探索版</span>
             <span>→</span>
           </a>
         </div>
@@ -887,7 +1080,467 @@
     }
 
     // =================================================================
-    // FlipCard 3D 物理傾斜翻轉卡片引擎（feitangyuan/motion-web 彈簧阻尼系統）
+    // FoldText 3D 摺紙立體進場演算法
+    // =================================================================
+    function initFoldText(targetId, text, options = {}) {
+      if (typeof document === 'undefined') return;
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const content = text || (el.textContent ? el.textContent.trim() : '');
+      if (!content) return;
+      const stagger = options.stagger || 0.045;
+      const duration = options.duration || 0.65;
+      const perspective = options.perspective || 700;
+      const color = options.color || 'inherit';
+
+      if (el.classList && typeof el.classList.remove === 'function') {
+        el.classList.remove('fold-text-revealed');
+      }
+      if (typeof el.setAttribute === 'function') {
+        el.setAttribute('aria-label', content);
+      }
+      el.innerHTML = '';
+      if (el.style) el.style.perspective = `${perspective}px`;
+
+      const chars = Array.from(content);
+      chars.forEach((char, idx) => {
+        const charWrap = document.createElement('span');
+        charWrap.className = 'fold-text-char';
+        if (typeof charWrap.setAttribute === 'function') {
+          charWrap.setAttribute('aria-hidden', 'true');
+        }
+        if (charWrap.style) charWrap.style.perspective = `${perspective}px`;
+
+        const inner = document.createElement('span');
+        inner.className = 'fold-text-inner';
+        if (char === ' ') {
+          inner.innerHTML = '&nbsp;';
+        } else {
+          inner.textContent = char;
+        }
+        if (inner.style) {
+          inner.style.color = color;
+          inner.style.transitionDelay = `${(idx * stagger).toFixed(3)}s`;
+          inner.style.transitionDuration = `${duration}s`;
+        }
+
+        const crease = document.createElement('span');
+        crease.className = 'fold-text-crease';
+        if (crease.style) {
+          crease.style.transitionDelay = `${(idx * stagger).toFixed(3)}s`;
+          crease.style.transitionDuration = `${duration}s`;
+        }
+
+        inner.appendChild(crease);
+        charWrap.appendChild(inner);
+        el.appendChild(charWrap);
+      });
+
+      const raf = (typeof requestAnimationFrame === 'function') ? requestAnimationFrame : (cb) => setTimeout(cb, 16);
+      raf(() => {
+        setTimeout(() => {
+          if (el.classList && typeof el.classList.add === 'function') {
+            el.classList.add('fold-text-revealed');
+          }
+        }, 50);
+      });
+    }
+
+    // =================================================================
+    // CupStringPhysics 傳聲絲線實體弦震模擬引擎（Verlet 繩索物理波動方程）
+    // =================================================================
+    class CupStringPhysics {
+      constructor(canvasId) {
+        if (typeof document === 'undefined') return;
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas || typeof this.canvas.getContext !== 'function') return;
+        this.ctx = this.canvas.getContext('2d');
+        if (!this.ctx) return;
+
+        this.numNodes = 64;
+        this.pos = new Float32Array(this.numNodes);
+        this.vel = new Float32Array(this.numNodes);
+        this.damping = 0.982;
+        this.tension = 0.42;
+
+        this.currentProgress = 0.08;
+        this.targetProgress = 0.08;
+        this.orbVel = 0;
+
+        this.width = 300;
+        this.height = 48;
+        this.dpr = (typeof window !== 'undefined' && window.devicePixelRatio) ? Math.min(window.devicePixelRatio, 2) : 1;
+        this.lastTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+
+        this.resize();
+        if (typeof window !== 'undefined') {
+          window.addEventListener('resize', () => this.resize());
+        }
+        this.bindEvents();
+        this.loop = this.loop.bind(this);
+        if (typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(this.loop);
+        }
+      }
+
+      resize() {
+        if (!this.canvas) return;
+        const rect = this.canvas.getBoundingClientRect();
+        this.width = rect.width || 300;
+        this.height = rect.height || 48;
+        this.canvas.width = Math.floor(this.width * this.dpr);
+        this.canvas.height = Math.floor(this.height * this.dpr);
+        if (this.ctx) {
+          this.ctx.scale(this.dpr, this.dpr);
+        }
+      }
+
+      pluck(ratio, strength = 18) {
+        const clampedRatio = Math.max(0.05, Math.min(0.95, ratio));
+        const centerIdx = Math.floor(clampedRatio * (this.numNodes - 1));
+        const radius = 6;
+        for (let i = -radius; i <= radius; i++) {
+          const idx = centerIdx + i;
+          if (idx > 0 && idx < this.numNodes - 1) {
+            const weight = Math.cos((i / radius) * (Math.PI / 2));
+            this.vel[idx] += strength * weight;
+          }
+        }
+      }
+
+      setProgress(index) {
+        this.targetProgress = 0.08 + (index / 7) * 0.84;
+        this.pluck(this.targetProgress, 22);
+      }
+
+      bindEvents() {
+        if (!this.canvas) return;
+        let isPointerDown = false;
+        const handleStrum = (e) => {
+          const rect = this.canvas.getBoundingClientRect();
+          const xRatio = (e.clientX - rect.left) / rect.width;
+          this.pluck(xRatio, 20);
+        };
+
+        this.canvas.addEventListener('pointerdown', (e) => {
+          isPointerDown = true;
+          handleStrum(e);
+        });
+        this.canvas.addEventListener('pointermove', (e) => {
+          if (isPointerDown) handleStrum(e);
+        });
+        if (typeof window !== 'undefined') {
+          window.addEventListener('pointerup', () => { isPointerDown = false; });
+          window.addEventListener('pointercancel', () => { isPointerDown = false; });
+        }
+      }
+
+      update(dt) {
+        for (let i = 1; i < this.numNodes - 1; i++) {
+          const force = (this.pos[i - 1] - 2 * this.pos[i] + this.pos[i + 1]) * this.tension;
+          this.vel[i] += force;
+          this.vel[i] *= this.damping;
+        }
+        for (let i = 1; i < this.numNodes - 1; i++) {
+          this.pos[i] += this.vel[i];
+        }
+        this.pos[0] = 0;
+        this.pos[this.numNodes - 1] = 0;
+
+        const stiffness = 55;
+        const orbDamping = 0.86;
+        this.orbVel += (this.targetProgress - this.currentProgress) * stiffness * dt;
+        this.orbVel *= orbDamping;
+        this.currentProgress += this.orbVel * dt;
+      }
+
+      draw() {
+        if (!this.ctx) return;
+        const ctx = this.ctx;
+        const w = this.width;
+        const h = this.height;
+        const midY = h / 2;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // 傳聲絲線本體
+        ctx.beginPath();
+        for (let i = 0; i < this.numNodes; i++) {
+          const x = (i / (this.numNodes - 1)) * w;
+          const y = midY + this.pos[i];
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(143, 173, 255, 0.75)';
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+
+        // 8 個驛站刻度珠點
+        for (let s = 0; s < 8; s++) {
+          const sRatio = 0.08 + (s / 7) * 0.84;
+          const sX = sRatio * w;
+          const nodeIdx = Math.max(0, Math.min(this.numNodes - 1, Math.floor(sRatio * (this.numNodes - 1))));
+          const sY = midY + this.pos[nodeIdx];
+          const isPassed = s < currentIndex;
+          const isCurrent = s === currentIndex;
+
+          ctx.beginPath();
+          ctx.arc(sX, sY, isCurrent ? 5 : 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = isCurrent ? '#ff7d59' : (isPassed ? '#ffde94' : 'rgba(38, 47, 107, 0.25)');
+          ctx.fill();
+
+          if (isCurrent) {
+            ctx.beginPath();
+            ctx.arc(sX, sY, 8.5, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 125, 89, 0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
+        }
+
+        // 聲波光點精靈
+        const orbX = this.currentProgress * w;
+        const orbNodeIdx = Math.max(0, Math.min(this.numNodes - 1, Math.floor(this.currentProgress * (this.numNodes - 1))));
+        const orbY = midY + this.pos[orbNodeIdx];
+
+        const grad = ctx.createRadialGradient(orbX, orbY, 2, orbX, orbY, 16);
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.35, '#ffde94');
+        grad.addColorStop(0.7, 'rgba(143, 173, 255, 0.6)');
+        grad.addColorStop(1, 'rgba(143, 173, 255, 0)');
+
+        ctx.beginPath();
+        ctx.arc(orbX, orbY, 16, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(orbX, orbY, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(255, 222, 148, 0.8)';
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      loop(nowTime) {
+        const now = nowTime || ((typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now());
+        const dt = Math.min((now - this.lastTime) / 1000, 0.033);
+        this.lastTime = now;
+
+        this.update(dt);
+        this.draw();
+
+        if (typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(this.loop);
+        }
+      }
+    }
+
+    // =================================================================
+    // SlingButton 彈弓拉射物理引擎（Spring-Damper 彈簧阻尼系統）
+    // =================================================================
+    function initSlingButton() {
+      const launcher = document.getElementById('hero-sling-launcher');
+      const pad = document.getElementById('sling-pull-pad');
+      const bandLeft = document.getElementById('sling-band-left');
+      const bandRight = document.getElementById('sling-band-right');
+      if (!launcher || !pad) return;
+
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let velX = 0;
+      let velY = 0;
+      let isSnapping = false;
+      let snapFrameId = null;
+      const maxPull = 120;
+
+      const updateBands = (dx, dy) => {
+        const centerX = 70 + dx;
+        const centerY = 70 + dy;
+        const controlLeftX = 28 + (dx * 0.45);
+        const controlLeftY = 70 + (dy * 0.55);
+        const controlRightX = 112 + (dx * 0.45);
+        const controlRightY = 70 + (dy * 0.55);
+
+        if (bandLeft) {
+          bandLeft.setAttribute('d', `M 28 70 Q ${controlLeftX.toFixed(1)} ${controlLeftY.toFixed(1)} ${centerX.toFixed(1)} ${centerY.toFixed(1)}`);
+        }
+        if (bandRight) {
+          bandRight.setAttribute('d', `M 112 70 Q ${controlRightX.toFixed(1)} ${controlRightY.toFixed(1)} ${centerX.toFixed(1)} ${centerY.toFixed(1)}`);
+        }
+      };
+
+      const stopSnapping = () => {
+        if (snapFrameId && typeof cancelAnimationFrame === 'function') {
+          cancelAnimationFrame(snapFrameId);
+          snapFrameId = null;
+        }
+        isSnapping = false;
+      };
+
+      const startSpringSnap = (targetX, targetY, onComplete) => {
+        stopSnapping();
+        isSnapping = true;
+        let lastTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+        const stiffness = 220;
+        const damping = 0.78;
+
+        const loop = (nowTime) => {
+          if (!isSnapping) return;
+          const now = nowTime || ((typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now());
+          const dt = Math.min((now - lastTime) / 1000, 0.033);
+          lastTime = now;
+
+          velX += (targetX - currentX) * stiffness * dt;
+          velX *= damping;
+          currentX += velX * dt;
+
+          velY += (targetY - currentY) * stiffness * dt;
+          velY *= damping;
+          currentY += velY * dt;
+
+          pad.style.transform = `translate(${currentX.toFixed(1)}px, ${currentY.toFixed(1)}px)`;
+          updateBands(currentX, currentY);
+
+          const distToTarget = Math.hypot(targetX - currentX, targetY - currentY);
+          const currentSpeed = Math.hypot(velX, velY);
+
+          if (distToTarget < 0.5 && currentSpeed < 1.0) {
+            currentX = targetX;
+            currentY = targetY;
+            pad.style.transform = `translate(${targetX}px, ${targetY}px)`;
+            updateBands(targetX, targetY);
+            isSnapping = false;
+            if (onComplete) onComplete();
+            return;
+          }
+
+          if (typeof requestAnimationFrame === 'function') {
+            snapFrameId = requestAnimationFrame(loop);
+          }
+        };
+
+        if (typeof requestAnimationFrame === 'function') {
+          snapFrameId = requestAnimationFrame(loop);
+        }
+      };
+
+      const handlePointerDown = (e) => {
+        stopSnapping();
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        pad.setPointerCapture?.(e.pointerId);
+        pad.style.transition = 'none';
+      };
+
+      const handlePointerMove = (e) => {
+        if (!isDragging) return;
+        const rawDx = e.clientX - startX;
+        const rawDy = e.clientY - startY;
+        const dist = Math.hypot(rawDx, rawDy);
+
+        let dx = rawDx;
+        let dy = rawDy;
+        if (dist > maxPull) {
+          const ratio = maxPull / dist;
+          dx = rawDx * ratio;
+          dy = rawDy * ratio;
+        }
+
+        currentX = dx;
+        currentY = dy;
+        pad.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+        updateBands(dx, dy);
+      };
+
+      const handlePointerUp = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        pad.releasePointerCapture?.(e.pointerId);
+
+        const pullDist = Math.hypot(currentX, currentY);
+        if (pullDist > 25) {
+          velX = -currentX * 18;
+          velY = -currentY * 18;
+          startSpringSnap(0, 0, null);
+          triggerSlingshotLaunch();
+        } else {
+          startSpringSnap(0, 0, null);
+        }
+      };
+
+      pad.addEventListener('pointerdown', handlePointerDown);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('pointermove', handlePointerMove);
+        window.addEventListener('pointerup', handlePointerUp);
+        window.addEventListener('pointercancel', handlePointerUp);
+      }
+
+      launcher.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          triggerSlingshotLaunch();
+        }
+      });
+    }
+
+    // 觸發彈射進入橫向長廊（視角拉近平滑推進）
+    function triggerSlingshotLaunch() {
+      showToast('聲波光點發射・正在連線傳聲長廊！');
+      const hero = document.getElementById('slide-hero');
+      if (hero && hero.style) {
+        hero.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, filter 0.45s ease';
+        hero.style.transform = 'scale(1.15)';
+        hero.style.opacity = '0';
+        hero.style.filter = 'blur(4px)';
+      }
+      setTimeout(() => {
+        launchIntoGame();
+      }, 320);
+    }
+
+    // 切換至橫向遊戲舞台
+    function launchIntoGame() {
+      const hero = document.getElementById('slide-hero');
+      const gameSection = document.getElementById('quiz-game-section');
+      if (hero) {
+        hero.classList.add('hidden');
+        if (hero.style) {
+          hero.style.transform = '';
+          hero.style.opacity = '';
+          hero.style.filter = '';
+        }
+      }
+      if (gameSection) {
+        gameSection.classList.remove('hidden');
+        gameSection.classList.add('flex');
+        if (gameSection.style) {
+          gameSection.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+          gameSection.style.opacity = '0';
+          gameSection.style.transform = 'scale(0.96)';
+          const raf = (typeof requestAnimationFrame === 'function') ? requestAnimationFrame : (cb) => setTimeout(cb, 16);
+          raf(() => {
+            gameSection.style.opacity = '1';
+            gameSection.style.transform = 'scale(1)';
+          });
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      if (window.cupStringPhysics) {
+        window.cupStringPhysics.resize();
+        window.cupStringPhysics.setProgress(currentIndex);
+        window.cupStringPhysics.pluck(0.08, 26);
+      }
+      updateGameTrack();
+    }
+
+    // =================================================================
+    // FlipCard 3D 物理傾斜翻轉卡片引擎（Spring-Damper 二階彈簧阻尼系統）
     // =================================================================
     function initFlipCard() {
       const card = document.getElementById('style-flip-card');
@@ -913,19 +1566,16 @@
       const flipStiffness = 65;
       const flipDamping = 0.86;
 
-      // 物理求解迴圈（Spring-Damper 二階彈簧阻尼系統）
       function updatePhysics(nowTime) {
         const now = nowTime || ((typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now());
         const dt = Math.min((now - lastTime) / 1000, 0.033);
         lastTime = now;
 
-        // 翻轉角度彈簧力計算：平滑翻轉 180 度帶微幅回彈，徹底消除瞬間瞬移
         const targetFlipRot = isFlipped ? 180 : 0;
         velFlip += (targetFlipRot - curFlipRot) * flipStiffness * dt;
         velFlip *= flipDamping;
         curFlipRot += velFlip * dt;
 
-        // 傾角彈簧力計算：vel += (target - cur) * stiffness * dt; vel *= damping
         velX += (targetTiltX - curTiltX) * stiffness * dt;
         velX *= damping;
         curTiltX += velX * dt;
@@ -937,7 +1587,6 @@
         const scale = isHovered ? 1.025 : 1.0;
         card.style.transform = `rotateY(${(curFlipRot + curTiltY).toFixed(2)}deg) rotateX(${curTiltX.toFixed(2)}deg) scale(${scale})`;
 
-        // 動態光澤深度切換
         const isFacingBack = Math.abs((curFlipRot % 360)) > 90 && Math.abs((curFlipRot % 360)) < 270;
         if (isFacingBack) {
           if (glareFront) glareFront.style.opacity = '0';
@@ -964,13 +1613,11 @@
         const percentX = (mouseX / rect.width) * 2 - 1;
         const percentY = (mouseY / rect.height) * 2 - 1;
 
-        // 依據當前翻轉相位自動校正傾斜方向
         const flipCos = Math.cos(curFlipRot * (Math.PI / 180));
         const dirFactor = flipCos >= 0 ? 1 : -1;
         targetTiltX = -percentY * tiltMax * dirFactor;
         targetTiltY = percentX * tiltMax * dirFactor;
 
-        // 光澤反射計算
         const glareAngle = Math.atan2(percentY, percentX * dirFactor) * (180 / Math.PI) - 90;
         const isFacingBack = Math.abs((curFlipRot % 360)) > 90 && Math.abs((curFlipRot % 360)) < 270;
         const activeGlare = isFacingBack ? glareBack : glareFront;
@@ -1012,58 +1659,61 @@
       userAnswers = {};
       isAdvancing = false;
 
-      // 渲染所有垂直題目切片
+      // 渲染所有橫向題目切片
       renderAllQuestionSlides();
 
       // 更新相容容器與狀態
       renderQuestion();
+      updateGameTrack();
     }
 
-    // 渲染 8 個題目切片（一行一題、大大 1 2 3 4 5 橫向展開，極簡純淨）
+    // 渲染 8 個橫向題目切片
     function renderAllQuestionSlides() {
       const container = document.getElementById('quiz-slides-container');
       if (!container) return;
       container.innerHTML = '';
 
       activeQuestions.forEach((q, idx) => {
-        const slide = document.createElement('section');
+        const slide = document.createElement('div');
         slide.id = `slide-q-${idx}`;
-        slide.className = 'story-slide min-h-[82vh] flex flex-col justify-center items-center px-4 sm:px-8 py-10 relative scroll-mt-16';
+        slide.className = 'w-full flex-shrink-0 flex flex-col justify-center items-center px-4 sm:px-8 py-6 relative';
 
         const qNum = String(idx + 1).padStart(2, '0');
         const currentScore = userAnswers[q.id];
 
         slide.innerHTML = `
-          <div class="w-full max-w-3xl mx-auto p-6 sm:p-10 space-y-8 text-left">
+          <div class="w-full max-w-2xl mx-auto p-6 sm:p-8 space-y-6 text-left rounded-3xl bg-white/95 border border-brand-navy/15 shadow-sm">
             
             <div class="flex items-center justify-between">
               <span class="font-display font-black text-xs text-brand-navy tracking-widest uppercase">
-                ${qNum} / 08
+                傳聲驛站 ${qNum} ｜ ${q.station}
               </span>
-              ${idx > 0 ? `<button type="button" class="btn-prev-slide text-xs text-brand-sub hover:text-brand-navy font-bold py-1 px-2.5 rounded-full hover:bg-brand-navy/5 transition-colors" data-prev="${idx - 1}">← 上一題</button>` : ''}
+              <span class="text-xs font-bold text-brand-sub px-3 py-1 rounded-full border border-brand-navy/10 bg-[#fffaed]">
+                ${idx + 1} / 08
+              </span>
             </div>
 
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy leading-relaxed py-1">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-black text-brand-navy leading-relaxed">
               ${q.text}
             </h2>
 
-            <!-- 大大的 1 2 3 4 5 橫向鋪滿選項 -->
-            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-3" role="radiogroup" aria-label="第 ${qNum} 題 5 點量表">
+            <!-- 1 2 3 4 5 橫向五點選項 -->
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 pt-2" role="radiogroup" aria-label="第 ${qNum} 題 5 點量表">
               ${scaleOptions.map(opt => {
                 const selected = (currentScore === opt.score);
                 return `
                   <button type="button" role="radio" aria-checked="${selected ? 'true' : 'false'}"
                     data-qid="${q.id}" data-score="${opt.score}" data-idx="${idx}"
-                    class="btn-option-card option-card-interactive group p-5 sm:p-6 flex flex-col items-center justify-between text-center ${
+                    class="btn-option-card option-card-interactive group p-4 sm:p-5 flex flex-col items-center justify-between text-center ${
                       selected ? 'option-card-selected' : ''
                     }">
-                    <span class="font-display font-black text-3xl sm:text-4xl text-brand-navy group-hover:text-brand-blue transition-colors">
+                    <span class="font-display font-black text-2xl sm:text-3xl text-brand-navy group-hover:text-brand-blue transition-colors">
                       ${opt.score}
                     </span>
-                    <span class="text-xs font-bold text-brand-sub group-hover:text-brand-navy mt-3 leading-snug">
+                    <span class="text-xs font-bold text-brand-sub group-hover:text-brand-navy mt-2 leading-snug">
                       ${opt.label}
                     </span>
-                    <span class="opt-indicator-dot w-2 h-2 rounded-full mt-3 transition-colors ${selected ? 'bg-brand-blue' : 'bg-brand-navy/15'}"></span>
+                    <span class="opt-indicator-dot w-2 h-2 rounded-full mt-2 transition-colors ${selected ? 'bg-brand-blue' : 'bg-brand-navy/15'}"></span>
                   </button>
                 `;
               }).join('')}
@@ -1085,21 +1735,28 @@
             selectScore(qid, score, idx);
           });
         });
+      }
+    }
 
-        // 綁定題目內上一題按鈕
-        container.querySelectorAll('.btn-prev-slide').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const prevIdx = parseInt(btn.getAttribute('data-prev'), 10);
-            if (prevIdx >= 0) {
-              currentIndex = prevIdx;
-              renderQuestion();
-              const prevSlide = document.getElementById(`slide-q-${prevIdx}`);
-              if (prevSlide && typeof prevSlide.scrollIntoView === 'function') {
-                prevSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }
-          });
-        });
+    // 更新橫向長廊滾動位置與光點
+    function updateGameTrack() {
+      const container = document.getElementById('quiz-slides-container');
+      const progressFill = document.getElementById('game-track-progress-fill');
+      const progressBadge = document.getElementById('game-progress-badge');
+      const gamePrevBtn = document.getElementById('btn-game-prev');
+
+      if (container) {
+        container.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      const percent = ((currentIndex + 1) / 8) * 100;
+      if (progressFill) progressFill.style.width = `${percent}%`;
+      if (progressBadge) progressBadge.textContent = `${String(currentIndex + 1).padStart(2, '0')} / 08`;
+      if (gamePrevBtn) gamePrevBtn.disabled = (currentIndex === 0);
+
+      // 動態更新傳聲絲線上的聲波光點進度
+      if (window.cupStringPhysics) {
+        window.cupStringPhysics.setProgress(currentIndex);
       }
     }
 
@@ -1177,6 +1834,8 @@
           optionsContainer.appendChild(btn);
         });
       }
+
+      updateGameTrack();
     }
 
     // 點選分數、更新高光並平滑推進至下一題
@@ -1201,10 +1860,8 @@
           currentIndex = targetIdx + 1;
           isAdvancing = false;
           renderQuestion();
-          // 平滑滾動到下一題切片
-          const nextSlide = document.getElementById(`slide-q-${currentIndex}`);
-          if (nextSlide && typeof nextSlide.scrollIntoView === 'function') {
-            nextSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (window.cupStringPhysics) {
+            window.cupStringPhysics.setProgress(currentIndex);
           }
         } else {
           isAdvancing = false;
@@ -1213,29 +1870,39 @@
           if (unansweredIdx !== -1) {
             currentIndex = unansweredIdx;
             renderQuestion();
-            const unansweredSlide = document.getElementById(`slide-q-${currentIndex}`);
-            if (unansweredSlide && typeof unansweredSlide.scrollIntoView === 'function') {
-              unansweredSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (window.cupStringPhysics) {
+              window.cupStringPhysics.setProgress(currentIndex);
             }
             showToast(`還有第 ${String(unansweredIdx + 1).padStart(2, '0')} 題尚未作答喔！`);
           } else {
-            finishQuiz();
+            // 第 8 題回答完畢，聲波光點進入聆聽端紙杯結算
+            if (window.cupStringPhysics) {
+              window.cupStringPhysics.targetProgress = 0.98;
+              window.cupStringPhysics.pluck(0.95, 28);
+            }
+            const receiverCup = document.getElementById('receiver-cup-container');
+            if (receiverCup && receiverCup.style) {
+              receiverCup.style.transform = 'scale(1.22)';
+              setTimeout(() => { receiverCup.style.transform = 'scale(1.0)'; }, 300);
+            }
+            setTimeout(() => {
+              finishQuiz();
+            }, 380);
           }
         }
-      }, 200);
+      }, 220);
     }
 
     // 完成測驗與計分演算法
     function finishQuiz() {
-      const slidesContainer = document.getElementById('quiz-slides-container');
-      if (slidesContainer) slidesContainer.classList.add('hidden');
-      const heroSection = document.getElementById('slide-hero');
-      if (heroSection) heroSection.classList.add('hidden');
+      const gameSection = document.getElementById('quiz-game-section');
+      if (gameSection) gameSection.classList.add('hidden');
 
       const loadingEl = document.getElementById('panel-loading');
       if (loadingEl) {
         loadingEl.classList.remove('hidden');
         loadingEl.classList.add('flex');
+        initFoldText('loading-fold-title', '正在為你梳理傾聽羅盤……');
       }
 
       // 計算四大指標總分
@@ -1275,6 +1942,7 @@
         const resultEl = document.getElementById('panel-result');
         if (resultEl) {
           resultEl.classList.remove('hidden');
+          initFoldText('result-fold-title', '探索通關・羅盤覺醒');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       }, 700);
@@ -1370,16 +2038,37 @@
       // 初始化題庫
       startQuiz();
 
+      // 初始化傳聲絲線物理模擬器
+      window.cupStringPhysics = new CupStringPhysics('cup-string-canvas');
+
+      // 初始化 3D 摺紙進場標題
+      initFoldText('hero-fold-title', '遇見你的傾聽超能力');
+
+      // 初始化彈弓
+      initSlingButton();
+
       // 初始化 FlipCard 3D 物理翻轉卡
       initFlipCard();
 
-      // Hero 區開始按鈕滾動至第一題
+      // Hero 區直接開始按鈕
       const btnStartHero = document.getElementById('btn-start-quiz-hero');
       if (btnStartHero) {
         btnStartHero.addEventListener('click', () => {
-          const firstSlide = document.getElementById('slide-q-0');
-          if (firstSlide && typeof firstSlide.scrollIntoView === 'function') {
-            firstSlide.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          launchIntoGame();
+        });
+      }
+
+      // 橫向遊戲上一題按鈕
+      const btnGamePrev = document.getElementById('btn-game-prev');
+      if (btnGamePrev) {
+        btnGamePrev.addEventListener('click', () => {
+          if (currentIndex > 0) {
+            isAdvancing = false;
+            currentIndex--;
+            renderQuestion();
+            if (window.cupStringPhysics) {
+              window.cupStringPhysics.setProgress(currentIndex);
+            }
           }
         });
       }
@@ -1392,6 +2081,9 @@
             isAdvancing = false;
             currentIndex--;
             renderQuestion();
+            if (window.cupStringPhysics) {
+              window.cupStringPhysics.setProgress(currentIndex);
+            }
           }
         });
       }
@@ -1411,12 +2103,18 @@
             loadingEl.classList.add('hidden');
             loadingEl.classList.remove('flex');
           }
-          const slidesContainer = document.getElementById('quiz-slides-container');
-          if (slidesContainer) slidesContainer.classList.remove('hidden');
+          const gameSection = document.getElementById('quiz-game-section');
+          if (gameSection) gameSection.classList.add('hidden');
           const heroSection = document.getElementById('slide-hero');
           if (heroSection) heroSection.classList.remove('hidden');
           
           startQuiz();
+          if (window.cupStringPhysics) {
+            window.cupStringPhysics.currentProgress = 0.08;
+            window.cupStringPhysics.targetProgress = 0.08;
+            window.cupStringPhysics.orbVel = 0;
+            window.cupStringPhysics.pluck(0.08, 16);
+          }
           window.scrollTo({ top: 0, behavior: 'smooth' });
           showToast('已重設測驗・邀請你重新啟程');
         });
