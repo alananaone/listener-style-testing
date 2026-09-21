@@ -105,10 +105,13 @@ def run_subagent_audit(file_path):
         scores['emotional_resonance'] -= 4
         deductions['emotional_resonance'].append("核心溫柔陪伴文案不足，無法充分傳達「我在乎你」的容器感（扣 4 分）")
 
-    # 2. 雙子標誌與品牌資產真實運用
-    if '1.png' not in content:
+    # 2. 傾聽者視覺呈現（使用者明確指示：不要有圖片了，改為 /lieflat-charts 簡潔純 SVG 幾何呈現）
+    if '<img' in content:
         scores['emotional_resonance'] -= 6
-        deductions['emotional_resonance'].append("未使用官方雙子水滴視覺資產 1.png（扣 6 分）")
+        deductions['emotional_resonance'].append("偵測到點陣 <img> 圖片，違反「不要有那個圖片了」之極簡要求（扣 6 分）")
+    if 'svg' not in content.lower():
+        scores['emotional_resonance'] -= 4
+        deductions['emotional_resonance'].append("缺少純 SVG 視覺化圖騰呈現（扣 4 分）")
 
     # 3. 象限落點動畫與視覺層次
     if 'pin-ring' not in content and 'pulse' not in content:
