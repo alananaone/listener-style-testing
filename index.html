@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>遇見你的傾聽超能力：日常陪伴取向風格探索 ｜ 聆森 Listenfy</title>
   
-  <!-- 字型引入：英數字 Plus Jakarta Sans + 繁體中文 Noto Serif TC & Noto Sans TC -->
+  <!-- 字型引入：英數字 Plus Jakarta Sans ＋ 繁體中文 Noto Serif TC 與 Noto Sans TC -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -22,14 +22,22 @@
           colors: {
             brand: {
               bg: '#fffaed',
-              orange: '#ff7d59',
-              blue: '#8fadff',
-              green: '#d9de81',
-              yellow: '#ffde94',
-              pink: '#f4a7c3',
-              navy: '#262f6b',
-              dark: '#2c3345',
-              muted: '#6b7280'
+              orange: '#ff6b42',
+              'orange-hover': '#ff5527',
+              'orange-soft': '#ffece6',
+              blue: '#6b95ff',
+              'blue-soft': '#eef4ff',
+              green: '#92c938',
+              'green-soft': '#f3fae8',
+              yellow: '#ffcf54',
+              'yellow-soft': '#fff9e8',
+              pink: '#f28bab',
+              'pink-soft': '#fdf0f4',
+              navy: '#1d2558',
+              'navy-light': '#2b3472',
+              dark: '#232b5d',
+              sub: '#374279',
+              muted: '#4a5482'
             }
           },
           fontFamily: {
@@ -48,17 +56,25 @@
   </script>
 
   <style>
-    /* 全域基礎設定與色彩 Token */
+    /* 全域核心色彩與幾何變數 */
     :root {
+      color-scheme: light;
       --color-bg: #fffaed;
-      --color-primary-orange: #ff7d59;
-      --color-primary-blue: #8fadff;
-      --color-accent-green: #d9de81;
-      --color-accent-yellow: #ffde94;
-      --color-accent-pink: #f4a7c3;
-      --color-navy: #262f6b;
-      --color-text-dark: #2c3345;
-      --color-text-muted: #6b7280;
+      --color-primary-orange: #ff6b42;
+      --color-primary-blue: #6b95ff;
+      --color-accent-green: #92c938;
+      --color-accent-yellow: #ffcf54;
+      --color-accent-pink: #f28bab;
+      --color-navy: #1d2558;
+      --color-text-dark: #232b5d;
+      --color-text-sub: #374279;
+      --color-text-muted: #4a5482;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+      }
     }
 
     body {
@@ -69,73 +85,127 @@
       padding: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    /* 孔版印刷波點微雜訊背景紋理 */
+    /* 溫暖氛圍光暈與細緻質感底紋 */
+    .ambient-glow-wrapper {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .glow-sphere-1 {
+      position: absolute;
+      top: -100px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(255, 183, 148, 0.32) 0%, rgba(255, 250, 237, 0) 70%);
+      filter: blur(48px);
+    }
+    .glow-sphere-2 {
+      position: absolute;
+      bottom: -120px;
+      left: -100px;
+      width: 540px;
+      height: 540px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(143, 173, 255, 0.28) 0%, rgba(255, 250, 237, 0) 70%);
+      filter: blur(54px);
+    }
+    .glow-sphere-3 {
+      position: absolute;
+      top: 40%;
+      left: 60%;
+      width: 420px;
+      height: 420px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(255, 222, 148, 0.24) 0%, rgba(255, 250, 237, 0) 70%);
+      filter: blur(50px);
+    }
+
+    /* 孔版印刷波點微雜訊紋理 */
     .bg-risograph-pattern {
-      background-color: var(--color-bg);
-      background-image: radial-gradient(rgba(38, 47, 107, 0.06) 1.2px, transparent 1.2px), radial-gradient(rgba(255, 125, 89, 0.04) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(29, 37, 88, 0.035) 1.2px, transparent 1.2px);
       background-size: 24px 24px;
-      background-position: 0 0, 12px 12px;
+      background-position: 0 0;
     }
 
-    /* 平滑淡入與淡出動畫 */
-    .fade-enter {
-      opacity: 0;
-      transform: translateY(12px);
+    /* 平滑過渡動效 */
+    .panel-transition {
+      animation: gentle-fade-in 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .fade-enter-active {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 360ms cubic-bezier(0.16, 1, 0.3, 1), transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fade-leave {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .fade-leave-active {
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 220ms ease-in, transform 220ms ease-in;
+    @keyframes gentle-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* 選項點擊反饋與自然按壓彈性 */
-    .option-btn {
-      transition: transform 140ms ease, background-color 200ms ease, box-shadow 200ms ease;
+    /* 雙子標誌有機懸浮動效 */
+    @keyframes float-gentle {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-8px) rotate(1.2deg);
+      }
     }
-    .option-btn:hover {
-      transform: translateY(-2px);
-    }
-    .option-btn:active {
-      transform: scale(0.985);
+    .animate-float-slow {
+      animation: float-gentle 6s ease-in-out infinite;
     }
 
     /* 座標指示點脈衝波紋 */
     @keyframes pulse-ring {
       0% {
-        transform: scale(0.8);
-        opacity: 0.8;
+        transform: scale(0.85);
+        opacity: 0.9;
       }
       70% {
-        transform: scale(2.2);
+        transform: scale(2.4);
         opacity: 0;
       }
       100% {
-        transform: scale(2.2);
+        transform: scale(2.4);
         opacity: 0;
       }
     }
     .pin-ring {
-      animation: pulse-ring 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+      animation: pulse-ring 2.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
     }
 
-    /* 浮動有機色塊呼吸動效 */
-    @keyframes float-gentle {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(1.5deg); }
+    /* 5 點量表互動選項微動效 */
+    .quiz-option-item {
+      transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .animate-float-slow {
-      animation: float-gentle 7s ease-in-out infinite;
+    .quiz-option-item:hover {
+      transform: translateY(-2px);
+    }
+    .quiz-option-item:active {
+      transform: scale(0.985);
+    }
+
+    /* 無障礙焦點樣式 */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-primary-orange);
+      outline-offset: 3px;
+    }
+
+    /* 減動偏好支援 */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     /* 自訂捲軸樣式 */
@@ -146,308 +216,334 @@
       background: #fffaed;
     }
     ::-webkit-scrollbar-thumb {
-      background: #8fadff88;
+      background: rgba(107, 149, 255, 0.45);
       border-radius: 9999px;
     }
   </style>
 </head>
-<body class="bg-risograph-pattern min-h-screen flex flex-col justify-between selection:bg-brand-orange/20 selection:text-brand-navy">
+<body class="bg-risograph-pattern min-h-screen flex flex-col justify-between selection:bg-brand-orange/20 selection:text-brand-navy relative">
 
-  <!-- 頂部品牌導覽列 -->
-  <header class="w-full py-4 px-6 md:px-12 flex items-center justify-between">
-    <a href="#" onclick="window.location.reload();" class="flex items-center gap-3 group focus:outline-none">
-      <img src="1.png" alt="Listenfy 聆森雙子標誌" class="w-9 h-9 object-contain group-hover:rotate-6 transition-transform duration-300">
+  <!-- 背景氛圍柔光球 -->
+  <div class="ambient-glow-wrapper" aria-hidden="true">
+    <div class="glow-sphere-1"></div>
+    <div class="glow-sphere-2"></div>
+    <div class="glow-sphere-3"></div>
+  </div>
+
+  <!-- 頂部導覽列 -->
+  <header class="w-full py-5 px-6 sm:px-10 md:px-16 flex items-center justify-between relative z-10">
+    <a href="#" onclick="window.location.reload();" class="flex items-center gap-3.5 group rounded-2xl p-1">
+      <div class="w-11 h-11 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+        <img src="1.png" alt="Listenfy 聆森雙子標誌" class="w-10 h-10 object-contain">
+      </div>
       <div class="flex flex-col">
         <span class="font-display font-black text-xl tracking-tight text-brand-navy leading-none">Listenfy</span>
-        <span class="text-[11px] font-medium tracking-widest text-brand-navy/60 uppercase mt-0.5">聆森・傾聽超能力</span>
+        <span class="text-xs font-bold tracking-wider text-brand-sub mt-1">聆森・傾聽超能力</span>
       </div>
     </a>
 
     <div class="flex items-center gap-3">
-      <button id="btn-open-guide-nav" class="text-xs font-semibold text-brand-navy/80 hover:text-brand-navy bg-white/70 hover:bg-white px-3.5 py-2 rounded-full border border-brand-navy/15 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue">
+      <button id="btn-open-guide-nav" type="button" class="text-xs font-bold text-brand-navy bg-white/90 hover:bg-white px-4 py-2.5 rounded-full shadow-sm hover:shadow transition-all border border-brand-navy/10">
         探索指南
       </button>
-      <a href="https://github.com/alananaone/listener-style-testing" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-navy/70 hover:text-brand-navy px-3 py-2 rounded-full hover:bg-white/50 transition-colors">
-        GitHub
+      <a href="https://github.com/LuKK351/lukk-ai-ui-reference" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-brand-sub hover:text-brand-navy px-3 py-2 rounded-full hover:bg-white/60 transition-colors">
+        UI 參考
       </a>
     </div>
   </header>
 
-  <!-- 主內容容器 -->
-  <main class="w-full max-w-2xl mx-auto px-4 sm:px-6 py-6 md:py-10 flex-grow flex flex-col justify-center">
+  <!-- 主內容視圖容器 -->
+  <main class="w-full max-w-2xl mx-auto px-5 sm:px-8 py-6 md:py-10 flex-grow flex flex-col justify-center relative z-10">
 
-    <!-- ==================== 模組一：歡迎著陸頁 (#panel-welcome) ==================== -->
-    <section id="panel-welcome" class="space-y-8 text-center">
+    <!-- 模組一：歡迎著陸頁 -->
+    <section id="panel-welcome" class="panel-transition space-y-10 text-center">
       
-      <!-- 雙子象徵有機插畫裝飾 -->
-      <div class="relative w-44 h-44 mx-auto flex items-center justify-center">
-        <!-- 柔和浮動背景色塊 -->
-        <div class="absolute inset-0 bg-brand-blue/20 rounded-organic-1 blur-xl transform -rotate-6 animate-pulse"></div>
-        <div class="absolute inset-0 bg-brand-yellow/30 rounded-organic-2 blur-lg transform rotate-6"></div>
+      <!-- 雙子象徵有機插畫區域 -->
+      <div class="relative w-52 h-52 mx-auto flex items-center justify-center">
+        <!-- 柔和浮動背景色環 -->
+        <div class="absolute inset-0 bg-brand-blue/25 rounded-organic-1 blur-2xl transform -rotate-6 animate-pulse"></div>
+        <div class="absolute inset-0 bg-brand-yellow/35 rounded-organic-2 blur-xl transform rotate-6"></div>
         
-        <!-- 中央主要 Logo 呈現 -->
-        <div class="relative bg-white/90 p-5 rounded-organic-3 border border-brand-navy/10 shadow-sm animate-float-slow">
-          <img src="1.png" alt="Listenfy 標誌" class="w-28 h-28 object-contain">
+        <!-- 中央主要 Logo 呈現：直接無縫融於底色，無生硬白色矩形卡片 -->
+        <div class="relative p-4 animate-float-slow flex items-center justify-center">
+          <img src="1.png" alt="Listenfy 標誌雙子水滴" class="w-36 h-36 object-contain">
         </div>
       </div>
 
-      <!-- 標題與引言 -->
+      <!-- 標題與核心引言 -->
       <div class="space-y-4 max-w-xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-yellow/40 border border-brand-navy/10 text-brand-navy text-xs font-bold tracking-wider">
-          <span>關係取向風格探索</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
-          <span>8 題直覺切片</span>
+        <div class="flex items-center justify-center gap-2 text-xs font-black tracking-widest text-brand-orange uppercase">
+          <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
+          <span>關係取向風格探索・8 題直覺切片</span>
+          <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
         </div>
 
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy leading-snug">
+        <h1 class="text-3xl sm:text-4xl md:text-[2.65rem] font-serif font-black text-brand-navy leading-tight tracking-tight">
           遇見你的傾聽超能力<br>
-          <span class="text-brand-orange">日常陪伴取向風格探索</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-[#ff7e54] to-brand-yellow">日常陪伴取向風格探索</span>
         </h1>
 
-        <p class="text-brand-navy/80 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-normal">
+        <p class="text-brand-dark text-base sm:text-lg leading-relaxed max-w-lg mx-auto font-medium pt-1">
           「最好的傾聽，不是照著標準答案點頭，而是帶著你的特質，給予對方最真誠的在場。」
         </p>
 
-        <p class="text-brand-muted text-xs sm:text-sm">
-          —— 聆森 Listen・Listening Connects Us｜傾聽他人，也照顧自己
+        <p class="text-brand-sub text-xs sm:text-sm font-semibold">
+          ── 聆森 Listen・Listening Connects Us｜傾聽他人，也照顧自己
         </p>
       </div>
 
-      <!-- 探索初衷小卡 -->
-      <div class="bg-white/80 rounded-2xl p-5 sm:p-6 text-left border border-brand-navy/10 space-y-3 shadow-sm backdrop-blur-sm">
-        <div class="font-bold text-brand-navy text-sm sm:text-base flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span>
-          <span>這份探索在做什麼？</span>
+      <!-- 探索初衷：開放式無邊框編排，自然留白與微色塊強調 -->
+      <div class="text-left space-y-3 pt-2 pb-1 max-w-xl mx-auto">
+        <div class="flex items-center gap-2.5">
+          <div class="w-3 h-3 rounded-full bg-brand-green"></div>
+          <h2 class="font-serif font-bold text-brand-navy text-base sm:text-lg">這份探索在做什麼？</h2>
         </div>
-        <p class="text-brand-dark text-xs sm:text-sm leading-relaxed">
-          這不是打分數的心理測驗，而是一面溫柔的小鏡子。我們挑選了 8 個在日常生活陪伴、朋友深聊時最常見的互動切片，協助你照見自己在面對身邊的人傾訴時，最自然流露的直覺與姿態。
+        <p class="text-brand-dark text-sm sm:text-base leading-relaxed pl-5 font-normal">
+          這不是打分數的心理測驗，而是一面溫柔的小鏡子。我們挑選了 8 個在日常生活陪伴、朋友深聊時最常見的互動切片，協助你照見自己在面對身邊的人傾訴時，最自然流露的直覺與姿態。每一種風格，都是你在關係裡接住彼此的獨特力量。
         </p>
       </div>
 
       <!-- 行動按鈕列 -->
-      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button id="btn-start-quiz" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-brand-navy text-brand-bg font-bold text-base hover:bg-brand-navy/90 active:scale-95 transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-brand-orange/30">
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button id="btn-start-quiz" type="button" class="w-full sm:w-auto px-10 py-4 rounded-full bg-brand-navy text-white font-bold text-base hover:bg-brand-navy-light active:scale-95 transition-all shadow-md hover:shadow-lg">
           開始探索我的超能力
         </button>
-        <button id="btn-open-guide-hero" class="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white/80 hover:bg-white text-brand-navy font-semibold text-sm border border-brand-navy/15 transition-all focus:outline-none">
+        <button id="btn-open-guide-hero" type="button" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/90 hover:bg-white text-brand-navy font-bold text-sm shadow-sm hover:shadow transition-all border border-brand-navy/10">
           了解兩大傾聽羅盤
         </button>
       </div>
     </section>
 
-    <!-- ==================== 模組二：作答測驗區 (#panel-quiz) ==================== -->
-    <section id="panel-quiz" class="hidden space-y-7">
+    <!-- 模組二：作答測驗區 -->
+    <section id="panel-quiz" class="panel-transition hidden space-y-8">
       
-      <!-- 進度指示列 -->
-      <div class="space-y-2">
-        <div class="flex items-center justify-between text-xs font-semibold text-brand-navy/70">
-          <span id="quiz-question-counter">探索題目 1 / 8</span>
-          <span id="quiz-progress-text">12.5%</span>
+      <!-- 頂部進度指示列 -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between text-xs font-bold text-brand-sub">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
+            <span id="quiz-question-counter" class="tracking-wide">探索題目 01 / 08</span>
+          </div>
+          <span id="quiz-progress-text" class="font-display font-black text-brand-orange">12.5％</span>
         </div>
-        <div class="w-full h-2.5 bg-brand-navy/10 rounded-full overflow-hidden p-0.5 border border-brand-navy/10">
-          <div id="quiz-progress-bar" class="h-full bg-brand-orange rounded-full transition-all duration-300 ease-out" style="width: 12.5%;"></div>
+        <div class="w-full h-3 bg-brand-navy/10 rounded-full overflow-hidden p-0.5">
+          <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-brand-orange via-[#ff8f4d] to-brand-yellow rounded-full transition-all duration-400 ease-out" style="width: 12.5%;"></div>
         </div>
       </div>
 
-      <!-- 題目內容卡片 -->
-      <div class="bg-white/90 rounded-3xl p-6 sm:p-8 border border-brand-navy/10 shadow-sm space-y-5 transition-all">
+      <!-- 題目內容區域：大氣透氣留白排版 -->
+      <div class="space-y-4 pt-2">
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded-full bg-brand-blue/20 text-brand-navy text-xs font-bold tracking-wider">
-            情境切片 <span id="quiz-current-num">01</span>
+          <span class="text-xs font-black tracking-widest text-brand-orange uppercase">
+            情境切片・第 <span id="quiz-current-num">01</span> 題
           </span>
-          <span class="text-xs text-brand-muted">憑直覺選擇最接近的感受</span>
+          <span class="text-brand-sub text-xs font-medium">｜ 依第一直覺作答即可，沒有對錯之分</span>
         </div>
 
-        <h2 id="quiz-question-text" class="text-base sm:text-lg md:text-xl font-medium text-brand-navy leading-relaxed min-h-[5rem] flex items-center">
+        <h2 id="quiz-question-text" class="text-xl sm:text-2xl md:text-[1.7rem] font-serif font-bold text-brand-navy leading-relaxed min-h-[5.5rem] flex items-center">
           題目讀取中……
         </h2>
       </div>
 
-      <!-- 5 點量表選擇按鈕列表 -->
-      <div class="space-y-2.5" id="quiz-options-container">
-        <!-- 由 JavaScript 動態渲染 5 個選項 -->
+      <!-- 5 點量表互動選項列表：暖光微階無冗餘標籤設計 -->
+      <div class="space-y-3" id="quiz-options-container" role="radiogroup" aria-label="5 點評分量表">
+        <!-- 由 JavaScript 動態注入 5 個現代質感選項按鈕 -->
       </div>
 
-      <!-- 底部輔助按鈕列 -->
-      <div class="flex items-center justify-between pt-2">
-        <button id="btn-quiz-prev" class="text-xs font-bold text-brand-navy/60 hover:text-brand-navy px-4 py-2 rounded-full hover:bg-white/60 transition-colors disabled:opacity-30 disabled:pointer-events-none focus:outline-none">
-          上一題
+      <!-- 底部導覽輔助列 -->
+      <div class="flex items-center justify-between pt-4">
+        <button id="btn-quiz-prev" type="button" class="text-xs font-bold text-brand-sub hover:text-brand-navy px-4 py-2.5 rounded-full hover:bg-white/80 transition-all disabled:opacity-30 disabled:pointer-events-none">
+          ← 上一題
         </button>
-        <span class="text-[11px] text-brand-muted">
-          點選後將自動為你推進下一題
+        <span class="text-xs text-brand-sub font-medium">
+          點選後自動推進，隨時可回上一題修改
         </span>
       </div>
     </section>
 
-    <!-- ==================== 模組三：過渡加載動畫 (#panel-loading) ==================== -->
-    <section id="panel-loading" class="hidden text-center py-20 space-y-6">
-      <div class="relative w-28 h-28 mx-auto flex items-center justify-center">
-        <div class="absolute inset-0 bg-brand-orange/30 rounded-full animate-ping opacity-60"></div>
+    <!-- 模組三：過渡加載動畫 -->
+    <section id="panel-loading" class="panel-transition hidden text-center py-20 space-y-6">
+      <div class="relative w-32 h-32 mx-auto flex items-center justify-center">
+        <div class="absolute inset-0 bg-brand-orange/25 rounded-full animate-ping opacity-75"></div>
         <div class="absolute inset-2 bg-brand-blue/30 rounded-full animate-pulse"></div>
-        <div class="relative w-14 h-14 bg-white rounded-2xl flex items-center justify-center border border-brand-navy/10 shadow-sm">
-          <div class="w-5 h-5 rounded-full bg-brand-navy animate-bounce"></div>
+        <div class="relative w-16 h-16 rounded-3xl flex items-center justify-center">
+          <img src="1.png" alt="載入中雙子標誌" class="w-12 h-12 object-contain animate-bounce">
         </div>
       </div>
       
       <div class="space-y-2">
-        <h3 class="text-xl font-serif font-bold text-brand-navy">正在梳理你的傾聽羅盤……</h3>
-        <p class="text-xs sm:text-sm text-brand-muted">照見日常對話裡的直覺姿態與特質光芒</p>
+        <h3 class="text-2xl font-serif font-black text-brand-navy">正在為你梳理傾聽羅盤……</h3>
+        <p class="text-sm sm:text-base text-brand-sub font-medium">深呼吸，照見日常陪伴裡的直覺姿態與特質光芒</p>
       </div>
     </section>
 
-    <!-- ==================== 模組四：探索報告結果 (#panel-result) ==================== -->
-    <section id="panel-result" class="hidden space-y-8">
+    <!-- 模組四：探索報告結果 -->
+    <section id="panel-result" class="panel-transition hidden space-y-10">
 
-      <!-- 截圖分享目標容器 (#result-capture-target) -->
-      <div id="result-capture-target" class="bg-[#fffaed] p-6 sm:p-8 rounded-3xl border border-brand-navy/15 shadow-sm space-y-8">
+      <!-- 截圖分享目標畫布 -->
+      <div id="result-capture-target" class="bg-[#fffaed] p-6 sm:p-10 rounded-3xl space-y-8 relative overflow-hidden">
 
         <!-- 圖卡頂部品牌識別 -->
-        <div class="flex items-center justify-between pb-2">
-          <div class="flex items-center gap-2.5">
-            <img src="1.png" alt="Listenfy Logo" class="w-8 h-8 object-contain">
+        <div class="flex items-center justify-between pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl flex items-center justify-center">
+              <img src="1.png" alt="Listenfy Logo" class="w-9 h-9 object-contain">
+            </div>
             <div class="text-left">
               <span class="font-display font-black text-base text-brand-navy leading-none block">Listenfy 傾聽超能力探索</span>
-              <span class="text-[10px] text-brand-muted">聆森 Listen・Listening Connects Us</span>
+              <span class="text-xs font-bold text-brand-sub mt-0.5 block">聆森 Listen・Listening Connects Us</span>
             </div>
           </div>
-          <span class="text-[11px] font-bold text-brand-navy/70 px-2.5 py-1 bg-white rounded-full border border-brand-navy/10">
+          <div class="text-xs font-black text-brand-navy px-3.5 py-1.5 bg-white/90 rounded-full shadow-sm border border-brand-navy/10">
             風格探索報告
-          </span>
+          </div>
         </div>
-        <div class="w-full h-px bg-brand-navy/10"></div>
 
         <!-- 主要風格揭曉標題區 -->
-        <div class="text-center space-y-3">
-          <div class="inline-block px-3.5 py-1 rounded-full bg-brand-orange/15 text-brand-orange font-bold text-xs">
-            你的主要傾聽姿態
+        <div class="text-center space-y-3.5 pt-2">
+          <div class="flex items-center justify-center gap-2 text-xs font-black tracking-widest text-brand-orange uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+            <span>你的主要傾聽姿態</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
           </div>
-          <h2 id="result-style-name" class="text-2xl sm:text-3xl font-serif font-black text-brand-navy">
+
+          <h2 id="result-style-name" class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-brand-navy tracking-tight">
             陪伴聆聽者
           </h2>
-          <p id="result-style-superpower" class="text-brand-navy font-bold text-sm sm:text-base">
+
+          <p id="result-style-superpower" class="text-lg sm:text-xl font-bold text-brand-orange">
             超能力：心理安全感容器
           </p>
-          <p id="result-style-quote" class="text-xs sm:text-sm text-brand-dark/80 max-w-lg mx-auto leading-relaxed">
-            極具包容感與涵容空間，提供如「空氣、水、土壤」般的在場，無條件接納當下的脆弱與混亂。
+
+          <p id="result-style-quote" class="text-sm sm:text-base text-brand-dark max-w-xl mx-auto leading-relaxed font-medium">
+            「極具包容感與涵容空間，提供如『空氣、水、土壤』般的在場，無條件接納當下的脆弱與混亂。」
           </p>
         </div>
 
-        <!-- 象限落點座標圖 -->
-        <div class="space-y-3">
+        <!-- 象限落點座標圖：藝術化色彩羅盤 -->
+        <div class="space-y-4 pt-3">
           <div class="flex items-center justify-between text-xs font-bold text-brand-navy">
-            <span>傾聽象限落點</span>
-            <span id="result-coords-label" class="font-display text-brand-orange">座標計算中……</span>
+            <span class="text-base font-serif font-black">傾聽象限落點・風格羅盤</span>
+            <span id="result-coords-label" class="font-display text-sm text-brand-orange font-black">座標計算中……</span>
           </div>
 
-          <!-- 矩陣容器 -->
-          <div class="relative w-full aspect-square max-w-sm mx-auto bg-white rounded-2xl border border-brand-navy/15 overflow-hidden p-3 shadow-inner">
+          <!-- 羅盤矩陣畫布：圓形向心微柔彩盤 -->
+          <div class="relative w-full aspect-square max-w-md mx-auto rounded-full overflow-hidden p-6 shadow-sm bg-white/80 border border-brand-navy/10">
             
-            <!-- 四象限微弱底色分區 -->
+            <!-- 四象限柔和水彩質感色塊 -->
             <div class="absolute inset-0 grid grid-cols-2 grid-rows-2">
-              <div class="bg-brand-blue/10 flex flex-col justify-start items-start p-2.5">
-                <span class="text-[10px] font-bold text-brand-navy/60">陪伴聆聽者</span>
-                <span class="text-[9px] text-brand-muted">情緒 × 培育</span>
+              <div class="bg-brand-blue/15 flex flex-col justify-start items-start p-4 sm:p-5">
+                <span class="text-xs sm:text-sm font-bold text-brand-navy">陪伴聆聽者</span>
+                <span class="text-xs text-brand-sub mt-0.5 font-medium">情緒 × 培育</span>
               </div>
-              <div class="bg-brand-yellow/15 flex flex-col justify-start items-end p-2.5">
-                <span class="text-[10px] font-bold text-brand-navy/60">覺察聆聽者</span>
-                <span class="text-[9px] text-brand-muted">情緒 × 督促</span>
+              <div class="bg-brand-yellow/25 flex flex-col justify-start items-end p-4 sm:p-5">
+                <span class="text-xs sm:text-sm font-bold text-brand-navy">覺察聆聽者</span>
+                <span class="text-xs text-brand-sub mt-0.5 font-medium">情緒 × 督促</span>
               </div>
-              <div class="bg-brand-green/15 flex flex-col justify-end items-start p-2.5">
-                <span class="text-[10px] font-bold text-brand-navy/60">探索聆聽者</span>
-                <span class="text-[9px] text-brand-muted">事務 × 培育</span>
+              <div class="bg-brand-green/20 flex flex-col justify-end items-start p-4 sm:p-5">
+                <span class="text-xs sm:text-sm font-bold text-brand-navy">探索聆聽者</span>
+                <span class="text-xs text-brand-sub mt-0.5 font-medium">事務 × 培育</span>
               </div>
-              <div class="bg-brand-pink/15 flex flex-col justify-end items-end p-2.5">
-                <span class="text-[10px] font-bold text-brand-navy/60">行動聆聽者</span>
-                <span class="text-[9px] text-brand-muted">事務 × 督促</span>
+              <div class="bg-brand-pink/20 flex flex-col justify-end items-end p-4 sm:p-5">
+                <span class="text-xs sm:text-sm font-bold text-brand-navy">行動聆聽者</span>
+                <span class="text-xs text-brand-sub mt-0.5 font-medium">事務 × 督促</span>
               </div>
             </div>
 
-            <!-- 十字中心軸線 -->
+            <!-- 向心漣漪輔助同心圓 -->
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div class="w-full h-px bg-brand-navy/20"></div>
+              <div class="w-3/4 h-3/4 rounded-full border border-brand-navy/10"></div>
             </div>
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div class="h-full w-px bg-brand-navy/20"></div>
+              <div class="w-1/2 h-1/2 rounded-full border border-brand-navy/10"></div>
             </div>
 
-            <!-- 軸向端點文字標註 -->
-            <div class="absolute top-1 left-1/2 -translate-x-1/2 text-[10px] font-black text-brand-navy bg-white/80 px-2 py-0.5 rounded-full border border-brand-navy/10">
+            <!-- 中心十字輔助線 -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="w-full h-px bg-brand-navy/15"></div>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="h-full w-px bg-brand-navy/15"></div>
+            </div>
+
+            <!-- 軸向端點文字標註：全形標點中文規範 -->
+            <div class="absolute top-2.5 left-1/2 -translate-x-1/2 text-xs font-black text-brand-navy bg-white/95 px-3 py-1 rounded-full shadow-sm border border-brand-navy/10">
               關注情緒（Emotion）
             </div>
-            <div class="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] font-black text-brand-navy bg-white/80 px-2 py-0.5 rounded-full border border-brand-navy/10">
+            <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 text-xs font-black text-brand-navy bg-white/95 px-3 py-1 rounded-full shadow-sm border border-brand-navy/10">
               關注事務（Task）
             </div>
-            <div class="absolute left-1 top-1/2 -translate-y-1/2 text-[10px] font-black text-brand-navy bg-white/80 px-2 py-0.5 rounded-full border border-brand-navy/10">
+            <div class="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-black text-brand-navy bg-white/95 px-3 py-1 rounded-full shadow-sm border border-brand-navy/10">
               培育型
             </div>
-            <div class="absolute right-1 top-1/2 -translate-y-1/2 text-[10px] font-black text-brand-navy bg-white/80 px-2 py-0.5 rounded-full border border-brand-navy/10">
+            <div class="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs font-black text-brand-navy bg-white/95 px-3 py-1 rounded-full shadow-sm border border-brand-navy/10">
               督促型
             </div>
 
             <!-- 動態指示點 Pin -->
-            <div id="quadrant-pin" class="absolute z-10 w-6 h-6 -ml-3 -mt-3 flex items-center justify-center transition-all duration-700 ease-out" style="left: 50%; top: 50%;">
-              <div class="absolute inset-0 bg-brand-orange rounded-full pin-ring opacity-60"></div>
-              <div class="relative w-5 h-5 bg-brand-orange border-2 border-white rounded-full shadow-md flex items-center justify-center">
-                <div class="w-1.5 h-1.5 bg-brand-navy rounded-full"></div>
+            <div id="quadrant-pin" class="absolute z-20 w-8 h-8 -ml-4 -mt-4 flex items-center justify-center transition-all duration-700 ease-out" style="left: 50%; top: 50%;">
+              <div class="absolute inset-0 bg-brand-orange rounded-full pin-ring opacity-75"></div>
+              <div class="relative w-7 h-7 bg-brand-orange rounded-full shadow-md flex items-center justify-center border-2 border-white">
+                <div class="w-2.5 h-2.5 bg-brand-navy rounded-full"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 兩大羅盤得分分析 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- 兩大羅盤指數分析：無生硬灰框卡片堆疊的雜誌式編排 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
           
-          <!-- 焦點取向進度卡 -->
-          <div class="bg-white/85 rounded-2xl p-4 border border-brand-navy/10 space-y-3">
+          <!-- 焦點取向進度區域 -->
+          <div class="space-y-3 bg-white/70 p-5 rounded-3xl border border-brand-navy/10">
             <div class="flex items-center justify-between text-xs font-bold text-brand-navy">
-              <span>焦點取向（Radar Focus）</span>
-              <span id="score-focus-verdict" class="text-brand-orange">偏向情緒</span>
+              <span class="text-sm font-serif font-black">焦點取向（Radar Focus）</span>
+              <span id="score-focus-verdict" class="text-brand-orange font-bold text-sm">偏向關注情緒</span>
             </div>
-            <div class="space-y-2 text-xs">
+            <div class="space-y-3 text-xs">
               <div>
-                <div class="flex justify-between text-brand-dark mb-1">
+                <div class="flex justify-between text-brand-dark mb-1.5 font-bold">
                   <span>情緒指數（E）</span>
-                  <span id="score-e" class="font-bold">0 分</span>
+                  <span id="score-e" class="font-display font-black text-brand-navy">0 分</span>
                 </div>
-                <div class="w-full h-2 bg-brand-navy/10 rounded-full overflow-hidden">
-                  <div id="bar-e" class="h-full bg-brand-blue rounded-full" style="width: 50%;"></div>
+                <div class="w-full h-2.5 bg-brand-navy/10 rounded-full overflow-hidden p-0.5">
+                  <div id="bar-e" class="h-full bg-brand-blue rounded-full transition-all duration-500" style="width: 50%;"></div>
                 </div>
               </div>
               <div>
-                <div class="flex justify-between text-brand-dark mb-1">
+                <div class="flex justify-between text-brand-dark mb-1.5 font-bold">
                   <span>事務指數（T）</span>
-                  <span id="score-t" class="font-bold">0 分</span>
+                  <span id="score-t" class="font-display font-black text-brand-navy">0 分</span>
                 </div>
-                <div class="w-full h-2 bg-brand-navy/10 rounded-full overflow-hidden">
-                  <div id="bar-t" class="h-full bg-brand-yellow rounded-full" style="width: 50%;"></div>
+                <div class="w-full h-2.5 bg-brand-navy/10 rounded-full overflow-hidden p-0.5">
+                  <div id="bar-t" class="h-full bg-brand-yellow rounded-full transition-all duration-500" style="width: 50%;"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 關係姿態進度卡 -->
-          <div class="bg-white/85 rounded-2xl p-4 border border-brand-navy/10 space-y-3">
+          <!-- 關係姿態進度區域 -->
+          <div class="space-y-3 bg-white/70 p-5 rounded-3xl border border-brand-navy/10">
             <div class="flex items-center justify-between text-xs font-bold text-brand-navy">
-              <span>關係姿態（Stance）</span>
-              <span id="score-stance-verdict" class="text-brand-orange">偏向培育</span>
+              <span class="text-sm font-serif font-black">關係姿態（Stance）</span>
+              <span id="score-stance-verdict" class="text-brand-orange font-bold text-sm">偏向培育型</span>
             </div>
-            <div class="space-y-2 text-xs">
+            <div class="space-y-3 text-xs">
               <div>
-                <div class="flex justify-between text-brand-dark mb-1">
+                <div class="flex justify-between text-brand-dark mb-1.5 font-bold">
                   <span>培育指數（N）</span>
-                  <span id="score-n" class="font-bold">0 分</span>
+                  <span id="score-n" class="font-display font-black text-brand-navy">0 分</span>
                 </div>
-                <div class="w-full h-2 bg-brand-navy/10 rounded-full overflow-hidden">
-                  <div id="bar-n" class="h-full bg-brand-green rounded-full" style="width: 50%;"></div>
+                <div class="w-full h-2.5 bg-brand-navy/10 rounded-full overflow-hidden p-0.5">
+                  <div id="bar-n" class="h-full bg-brand-green rounded-full transition-all duration-500" style="width: 50%;"></div>
                 </div>
               </div>
               <div>
-                <div class="flex justify-between text-brand-dark mb-1">
+                <div class="flex justify-between text-brand-dark mb-1.5 font-bold">
                   <span>督促指數（C）</span>
-                  <span id="score-c" class="font-bold">0 分</span>
+                  <span id="score-c" class="font-display font-black text-brand-navy">0 分</span>
                 </div>
-                <div class="w-full h-2 bg-brand-navy/10 rounded-full overflow-hidden">
-                  <div id="bar-c" class="h-full bg-brand-pink rounded-full" style="width: 50%;"></div>
+                <div class="w-full h-2.5 bg-brand-navy/10 rounded-full overflow-hidden p-0.5">
+                  <div id="bar-c" class="h-full bg-brand-pink rounded-full transition-all duration-500" style="width: 50%;"></div>
                 </div>
               </div>
             </div>
@@ -456,23 +552,23 @@
         </div>
 
         <!-- 深度風格詮釋長文 -->
-        <div class="bg-white/80 rounded-2xl p-5 border border-brand-navy/10 space-y-2.5 text-left text-xs sm:text-sm text-brand-dark leading-relaxed">
-          <div class="font-bold text-brand-navy flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
-            <span>風格特質與陪伴視角</span>
+        <div class="text-left space-y-3 pt-2">
+          <div class="flex items-center gap-2.5">
+            <div class="w-3 h-3 rounded-full bg-brand-orange"></div>
+            <h3 class="font-serif font-bold text-brand-navy text-base sm:text-lg">風格特質與陪伴視角</h3>
           </div>
-          <p id="result-style-description">
+          <p id="result-style-description" class="text-brand-dark text-sm sm:text-base leading-relaxed pl-5 font-normal">
             正在生成個人特質分析……
           </p>
         </div>
 
         <!-- 寫在旅程開始之前 -->
-        <div class="bg-brand-yellow/20 rounded-2xl p-5 border border-brand-navy/10 text-left space-y-2 text-xs sm:text-sm">
-          <div class="font-bold text-brand-navy flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-navy"></span>
-            <span>寫在旅程開始之前</span>
+        <div class="text-left space-y-3 pt-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-3 h-3 rounded-full bg-brand-yellow"></div>
+            <h3 class="font-serif font-bold text-brand-navy text-base sm:text-lg">寫在旅程開始之前</h3>
           </div>
-          <p class="text-brand-dark/90 leading-relaxed">
+          <p class="text-brand-dark text-sm sm:text-base leading-relaxed pl-5 font-normal">
             每個人內在都同時擁有這四種力量，只是在不同關係與情境下，有些特質習慣走在前面。在「聆聽者培力計畫」中，我們期待陪伴你扎根日常對話，長出既能支持他人、亦能安放自我的關係韌性。
           </p>
         </div>
@@ -480,31 +576,33 @@
       </div>
 
       <!-- 功能操作按鈕列 -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-        <button id="btn-save-image" class="w-full sm:w-auto px-6 py-3 rounded-full bg-brand-orange text-white font-bold text-sm hover:bg-brand-orange/90 active:scale-95 transition-all shadow-sm focus:outline-none">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <button id="btn-save-image" type="button" class="w-full sm:w-auto px-9 py-4 rounded-full bg-brand-orange text-white font-bold text-sm hover:bg-brand-orange-hover active:scale-95 transition-all shadow-md hover:shadow-lg">
           儲存結果圖卡
         </button>
-        <button id="btn-copy-result" class="w-full sm:w-auto px-6 py-3 rounded-full bg-white text-brand-navy font-bold text-sm border border-brand-navy/20 hover:bg-white/80 active:scale-95 transition-all focus:outline-none">
+        <button id="btn-copy-result" type="button" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-brand-navy font-bold text-sm shadow-sm hover:shadow hover:bg-white/90 active:scale-95 transition-all border border-brand-navy/10">
           一鍵複製探索結果
         </button>
-        <button id="btn-retake-quiz" class="w-full sm:w-auto px-6 py-3 rounded-full bg-transparent text-brand-navy/70 hover:text-brand-navy font-semibold text-sm hover:bg-white/40 transition-colors focus:outline-none">
+        <button id="btn-retake-quiz" type="button" class="w-full sm:w-auto px-6 py-4 rounded-full bg-transparent text-brand-sub hover:text-brand-navy font-bold text-sm hover:bg-white/60 transition-colors">
           重新測驗
         </button>
       </div>
 
-      <!-- 報名導流區塊 -->
-      <div class="bg-brand-navy text-brand-bg rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-md">
-        <div class="inline-block px-3 py-1 rounded-full bg-white/10 text-brand-yellow text-xs font-bold">
-          聆聽者培力計畫
+      <!-- 培力計畫導流區塊：夜空深邃溫暖港灣 -->
+      <div class="bg-brand-navy text-white rounded-3xl p-8 sm:p-10 text-center space-y-5 shadow-lg">
+        <div class="flex items-center justify-center gap-2 text-xs font-bold tracking-widest text-brand-yellow uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></span>
+          <span>聆聽者培力計畫</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></span>
         </div>
-        <h3 class="text-xl sm:text-2xl font-serif font-black leading-snug">
+        <h3 class="text-2xl sm:text-3xl font-serif font-black leading-snug">
           帶著你的超能力，加入聆聽者行列
         </h3>
-        <p class="text-xs sm:text-sm text-brand-bg/80 max-w-md mx-auto leading-relaxed">
+        <p class="text-sm sm:text-base text-white/90 max-w-lg mx-auto leading-relaxed font-normal">
           完成自我覺察只是第一步。填寫學員表單，我們將把你的落點風格預先帶入，為你配對最合適的對話演練夥伴。
         </p>
         <div class="pt-2">
-          <a id="btn-go-form" href="https://forms.gle/" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3.5 rounded-full bg-brand-yellow text-brand-navy font-bold text-sm hover:bg-brand-yellow/90 active:scale-95 transition-all shadow-sm">
+          <a id="btn-go-form" href="https://forms.gle/" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 rounded-full bg-brand-yellow text-brand-navy font-black text-sm hover:bg-brand-yellow/90 active:scale-95 transition-all shadow-md hover:shadow-lg">
             填寫學員表單・踏上培力旅程
           </a>
         </div>
@@ -515,66 +613,64 @@
   </main>
 
   <!-- 探索指南彈窗 Modal -->
-  <div id="modal-guide" class="fixed inset-0 z-50 bg-brand-navy/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#fffaed] max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-brand-navy/20 shadow-xl space-y-6 max-h-[90vh] overflow-y-auto">
+  <div id="modal-guide" class="fixed inset-0 z-50 bg-brand-navy/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#fffaed] max-w-lg w-full rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-2">
-        <h3 class="font-serif font-black text-lg text-brand-navy">讀懂你的兩大傾聽羅盤</h3>
-        <button id="btn-close-guide" class="text-brand-navy/60 hover:text-brand-navy text-sm font-bold p-1 rounded-full hover:bg-brand-navy/5">
+        <h3 class="font-serif font-black text-xl text-brand-navy">讀懂你的兩大傾聽羅盤</h3>
+        <button id="btn-close-guide" type="button" class="text-brand-sub hover:text-brand-navy text-sm font-bold px-3 py-1.5 rounded-full hover:bg-brand-navy/5 transition-colors">
           關閉
         </button>
       </div>
-      <div class="w-full h-px bg-brand-navy/10"></div>
 
-      <div class="space-y-4 text-xs sm:text-sm text-brand-dark leading-relaxed">
-        <div class="bg-white/80 p-4 rounded-2xl border border-brand-navy/10 space-y-2">
-          <div class="font-bold text-brand-navy flex items-center gap-2">
+      <div class="space-y-5 text-sm text-brand-dark leading-relaxed">
+        <div class="space-y-2 bg-white/80 p-5 rounded-2xl border border-brand-navy/10">
+          <div class="font-bold text-brand-navy flex items-center gap-2 text-base">
             <span class="w-2.5 h-2.5 rounded-full bg-brand-blue"></span>
             <span>1. 焦點取向：你的雷達先掃描什麼？</span>
           </div>
-          <p>
+          <p class="text-xs sm:text-sm text-brand-dark/95 leading-relaxed font-normal">
             <strong>關注情緒端（Emotion）</strong>：心靈敏銳，第一時間捕捉到語氣顫抖、未言明的委屈。心情沒被看見，事情再討論也是隔靴搔癢。
           </p>
-          <p>
+          <p class="text-xs sm:text-sm text-brand-dark/95 leading-relaxed font-normal">
             <strong>關注事務端（Task）</strong>：腦袋清晰，自然梳理因果脈絡與現實卡點。協助整理混亂思緒、看清下一步，是最實在的溫柔。
           </p>
         </div>
 
-        <div class="bg-white/80 p-4 rounded-2xl border border-brand-navy/10 space-y-2">
-          <div class="font-bold text-brand-navy flex items-center gap-2">
+        <div class="space-y-2 bg-white/80 p-5 rounded-2xl border border-brand-navy/10">
+          <div class="font-bold text-brand-navy flex items-center gap-2 text-base">
             <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span>
             <span>2. 關係姿態：你習慣給予什麼力量？</span>
           </div>
-          <p>
+          <p class="text-xs sm:text-sm text-brand-dark/95 leading-relaxed font-normal">
             <strong>培育型（Nurturing）</strong>：像土壤與水，深信對方心底有自癒種子。給予充分留白與時間，陪伴對方按自己節奏破土。
           </p>
-          <p>
+          <p class="text-xs sm:text-sm text-brand-dark/95 leading-relaxed font-normal">
             <strong>督促型（Coaching）</strong>：像教練與推手，深信卡關時需要一把溫和而堅定的推力。透過提問錨定目標，跨出突破的第一步。
           </p>
         </div>
       </div>
 
       <div class="text-center pt-2">
-        <button id="btn-guide-confirm" class="w-full py-3 rounded-full bg-brand-navy text-white font-bold text-sm hover:bg-brand-navy/90">
+        <button id="btn-guide-confirm" type="button" class="w-full py-4 rounded-full bg-brand-navy text-white font-bold text-sm hover:bg-brand-navy-light transition-all shadow-sm">
           我理解了，準備好探索
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 輕量 Toast 提示 -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full bg-brand-navy text-brand-bg text-xs font-bold shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+  <!-- 輕量 Toast 提示訊息 -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-brand-navy text-white text-xs sm:text-sm font-bold shadow-xl transition-all duration-300 opacity-0 pointer-events-none">
     提示訊息
   </div>
 
-  <!-- 頁腳 -->
-  <div class="w-full h-px bg-brand-navy/10"></div>
-  <footer class="w-full py-6 text-center text-xs text-brand-muted">
+  <!-- 頁尾 -->
+  <footer class="w-full py-6 text-center text-xs text-brand-sub relative z-10">
     <p>© 2026 Listenfy 聆森・Listening Connects Us｜傾聽他人，也照顧自己</p>
   </footer>
 
-  <!-- ==================== 前端核心業務邏輯與狀態機 ==================== -->
+  <!-- 前端核心業務邏輯與狀態機 -->
   <script>
-    // 原始 8 題題庫定義（依照 GEMINI.md 規範）
+    // 原始 8 題題庫定義（嚴格依照 GEMINI.md 與測驗架構.md）
     const rawQuestions = [
       {
         id: 'Q1',
@@ -662,7 +758,7 @@
     // 運行時狀態管理
     let activeQuestions = [];
     let currentIndex = 0;
-    let userAnswers = {}; // { Q1: 4, Q2: 5, ... }
+    let userAnswers = {};
 
     // Fisher-Yates 洗牌演算法
     function shuffleQuestions(arr) {
@@ -674,7 +770,7 @@
       return shuffled;
     }
 
-    // 模組切換輔助函式
+    // 模組切換
     function showPanel(panelId) {
       const panels = ['panel-welcome', 'panel-quiz', 'panel-loading', 'panel-result'];
       panels.forEach(id => {
@@ -711,7 +807,7 @@
       renderQuestion();
     }
 
-    // 渲染當前題目
+    // 渲染當前題目與 5 點選項
     function renderQuestion() {
       const q = activeQuestions[currentIndex];
       const currentNumEl = document.getElementById('quiz-current-num');
@@ -724,8 +820,8 @@
       // 更新進度顯示
       const progressPercent = ((currentIndex + 1) / 8) * 100;
       currentNumEl.textContent = String(currentIndex + 1).padStart(2, '0');
-      counterEl.textContent = `探索題目 ${currentIndex + 1} / 8`;
-      progressText.textContent = `${progressPercent.toFixed(1)}%`;
+      counterEl.textContent = `探索題目 ${String(currentIndex + 1).padStart(2, '0')} / 08`;
+      progressText.textContent = `${progressPercent.toFixed(1)}％`;
       progressBar.style.width = `${progressPercent}%`;
 
       // 上一題按鈕狀態
@@ -734,7 +830,7 @@
       // 渲染題目文字
       textEl.textContent = q.text;
 
-      // 渲染 5 點選項列表
+      // 渲染 5 點現代觸控選項列表
       const optionsContainer = document.getElementById('quiz-options-container');
       optionsContainer.innerHTML = '';
 
@@ -742,17 +838,25 @@
         const isSelected = (userAnswers[q.id] === opt.score);
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `option-btn w-full p-4 rounded-2xl flex items-center justify-between border text-left transition-all ${
+        btn.setAttribute('role', 'radio');
+        btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        
+        btn.className = `quiz-option-item w-full py-4 px-5 sm:px-6 rounded-2xl flex items-center justify-between text-left transition-all ${
           isSelected
-            ? 'bg-brand-orange text-white border-brand-orange shadow-md'
-            : 'bg-white/80 hover:bg-white text-brand-dark border-brand-navy/10 hover:border-brand-navy/30'
+            ? 'bg-gradient-to-r from-brand-orange via-[#ff784c] to-[#ff8f5a] text-white shadow-md shadow-brand-orange/25 scale-[1.01]'
+            : 'bg-white/80 hover:bg-white text-brand-dark shadow-sm hover:shadow border border-brand-navy/10'
         }`;
 
         btn.innerHTML = `
-          <span class="font-medium text-xs sm:text-sm leading-tight">${opt.label}</span>
-          <span class="text-xs font-bold px-2 py-0.5 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-brand-navy/5 text-brand-navy/60'}">
-            ${opt.score} 分
-          </span>
+          <div class="flex items-center gap-3.5">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs transition-colors ${
+              isSelected ? 'bg-white text-brand-orange' : 'bg-brand-navy/5 text-brand-navy'
+            }">
+              ${opt.score}
+            </span>
+            <span class="font-bold text-base sm:text-lg leading-tight">${opt.label}</span>
+          </div>
+          <span class="w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-white' : 'bg-brand-navy/15'}"></span>
         `;
 
         btn.onclick = () => selectScore(q.id, opt.score);
@@ -760,11 +864,10 @@
       });
     }
 
-    // 點選選項
+    // 點選分數並前進
     function selectScore(questionId, score) {
       userAnswers[questionId] = score;
 
-      // 稍作停留後前進，營造流暢沉浸感
       setTimeout(() => {
         if (currentIndex < activeQuestions.length - 1) {
           currentIndex++;
@@ -772,22 +875,20 @@
         } else {
           finishQuiz();
         }
-      }, 180);
+      }, 160);
     }
 
-    // 完成測驗與計分
+    // 完成測驗與計分運算
     function finishQuiz() {
       showPanel('panel-loading');
 
-      // 計算各維度分數
-      const E = (userAnswers['Q1'] || 0) + (userAnswers['Q2'] || 0); // 2 ~ 10
-      const T = (userAnswers['Q3'] || 0) + (userAnswers['Q4'] || 0); // 2 ~ 10
-      const N = (userAnswers['Q5'] || 0) + (userAnswers['Q6'] || 0); // 2 ~ 10
-      const C = (userAnswers['Q7'] || 0) + (userAnswers['C8'] || userAnswers['Q8'] || 0); // 2 ~ 10
+      // 計算四大指標總分
+      const E = (userAnswers['Q1'] || 0) + (userAnswers['Q2'] || 0);
+      const T = (userAnswers['Q3'] || 0) + (userAnswers['Q4'] || 0);
+      const N = (userAnswers['Q5'] || 0) + (userAnswers['Q6'] || 0);
+      const C = (userAnswers['Q7'] || 0) + (userAnswers['Q8'] || 0);
 
       // 風格歸類邏輯（GEMINI.md）
-      // 焦點判斷：E >= T -> 情緒；反之 -> 事務
-      // 姿態判斷：N >= C -> 培育；反之 -> 督促
       let styleCode = 'A';
       if (E >= T && N >= C) {
         styleCode = 'A'; // 陪伴聆聽者
@@ -801,18 +902,18 @@
 
       // 象限座標映射計算（GEMINI.md 規範）
       // Delta X = C - N（範圍 -8 ～ +8）
-      // Position X（%）= 50 +（Delta X / 8）* 32%（範圍 18% ～ 82%）
+      // Position X（％）= 50 +（Delta X / 8）* 32％（範圍 18％ ～ 82％）
       const deltaX = C - N;
       let posX = 50 + (deltaX / 8) * 32;
       posX = Math.max(18, Math.min(82, posX));
 
       // Delta Y = T - E（範圍 -8 ～ +8，E 越大越往上，CSS top 越小）
-      // Position Y（%）= 50 +（Delta Y / 8）* 32%（範圍 18% ～ 82%）
+      // Position Y（％）= 50 +（Delta Y / 8）* 32％（範圍 18％ ～ 82％）
       const deltaY = T - E;
       let posY = 50 + (deltaY / 8) * 32;
       posY = Math.max(18, Math.min(82, posY));
 
-      // 模擬 700ms 溫和過渡動畫後呈現結果
+      // 700ms 溫和調頻動畫後顯示結果
       setTimeout(() => {
         renderResult(styleCode, { E, T, N, C, posX, posY, deltaX, deltaY });
         showPanel('panel-result');
@@ -823,20 +924,20 @@
     function renderResult(styleCode, metrics) {
       const profile = styleProfiles[styleCode];
 
-      // 風格名稱與描述
+      // 風格名稱與核心文字
       document.getElementById('result-style-name').textContent = profile.name;
       document.getElementById('result-style-superpower').textContent = `超能力：${profile.alias}`;
-      document.getElementById('result-style-quote').textContent = profile.quote;
+      document.getElementById('result-style-quote').textContent = `「${profile.quote}」`;
       document.getElementById('result-style-description').textContent = profile.description;
 
-      // 座標與文字
+      // 座標指示點動畫與文字標籤
       const pin = document.getElementById('quadrant-pin');
       pin.style.left = `${metrics.posX}%`;
       pin.style.top = `${metrics.posY}%`;
 
-      document.getElementById('result-coords-label').textContent = `(${metrics.posX.toFixed(0)}%, ${metrics.posY.toFixed(0)}%)`;
+      document.getElementById('result-coords-label').textContent = `（${metrics.posX.toFixed(0)}％，${metrics.posY.toFixed(0)}％）`;
 
-      // 得分長條圖與文字
+      // 長條圖與判定結果
       document.getElementById('score-focus-verdict').textContent = (metrics.E >= metrics.T) ? '偏向關注情緒' : '偏向關注事務';
       document.getElementById('score-e').textContent = `${metrics.E} / 10 分`;
       document.getElementById('score-t').textContent = `${metrics.T} / 10 分`;
@@ -849,7 +950,7 @@
       document.getElementById('bar-n').style.width = `${(metrics.N / 10) * 100}%`;
       document.getElementById('bar-c').style.width = `${(metrics.C / 10) * 100}%`;
 
-      // 預填表單連結（附帶風格與分數參數）
+      // 預填表單連結
       const formBtn = document.getElementById('btn-go-form');
       const params = new URLSearchParams({
         style: profile.name,
@@ -859,11 +960,11 @@
       });
       formBtn.href = `https://forms.gle/?${params.toString()}`;
 
-      // 綁定複製文字內容至當前閉包
+      // 綁定一鍵複製文字
       window.currentResultShareText = `【Listenfy 傾聽超能力探索】\n我的傾聽風格是：${profile.name}（${profile.alias}）\n焦點指數：情緒 ${metrics.E} 分 ｜ 事務 ${metrics.T} 分\n關係姿態：培育 ${metrics.N} 分 ｜ 督促 ${metrics.C} 分\n「${profile.quote}」\n探索你的傾聽超能力：https://github.com/alananaone/listener-style-testing`;
     }
 
-    // DOM 事件監聽綁定
+    // 事件監聽綁定
     document.addEventListener('DOMContentLoaded', () => {
       // 首頁按鈕
       document.getElementById('btn-start-quiz').addEventListener('click', startQuiz);
@@ -915,12 +1016,12 @@
 
         html2canvas(target, {
           backgroundColor: '#fffaed',
-          scale: 2, // 提升高畫質解析度
+          scale: 2,
           useCORS: true,
           logging: false
         }).then(canvas => {
           const link = document.createElement('a');
-          link.download = `Listenfy-傾聽風格報告.png`;
+          link.download = 'Listenfy-傾聽風格報告.png';
           link.href = canvas.toDataURL('image/png');
           link.click();
           showToast('圖卡已成功下載！');
