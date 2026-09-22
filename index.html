@@ -352,13 +352,7 @@
     <div class="glow-sphere-2"></div>
   </div>
 
-  <!-- 頂部品牌導航欄 -->
-  <header class="w-full max-w-4xl mx-auto px-4 sm:px-8 pt-6 pb-2 flex items-center justify-center text-center relative z-20">
-    <div class="flex items-center justify-center gap-2.5 text-brand-navy">
-      <img src="listenfy_icon.png" alt="Listenfy 傾聽標誌" class="w-8 sm:w-9 h-auto flex-shrink-0 object-contain">
-      <span class="font-display font-black text-sm tracking-tight">Listenfy 傾聽超能力探索</span>
-    </div>
-  </header>
+
 
   <!-- 相容性測試容器（隱藏於螢幕外，提供單元測試與自動化狀態讀取） -->
   <div id="compat-test-container" class="hidden" aria-hidden="true">
@@ -401,34 +395,21 @@
           <img src="1.png" alt="Listenfy 傾聽標誌" class="w-32 sm:w-40 h-auto object-contain">
         </div>
 
-        <div class="space-y-3">
+        <div>
           <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-black text-brand-navy leading-[1.2] tracking-tight">
-            遇見你的傾聽超能力
+            你的聆聽超能力
           </h1>
-
-          <p class="text-brand-sub text-base sm:text-xl font-normal max-w-xl mx-auto leading-relaxed">
-            日常陪伴取向風格探索
-          </p>
         </div>
 
-        <div class="max-w-xl mx-auto text-center space-y-2 pt-2">
+        <div class="max-w-lg mx-auto text-center pt-2">
           <p class="text-brand-dark text-base sm:text-lg leading-relaxed font-normal">
-            「最好的傾聽，不是照著標準答案點頭，而是帶著你的特質，給予對方最真誠的在場。」
-          </p>
-          <p class="text-brand-sub text-xs sm:text-sm font-medium">
-            ── 聆森 Listen・Listening Connects Us ｜ 傾聽他人，也照顧自己
-          </p>
-        </div>
-
-        <div class="max-w-lg mx-auto text-center pt-1">
-          <p class="text-brand-sub text-xs sm:text-sm leading-relaxed">
-            這不是一場給予分數的臨床診斷，而是一面照見日常陪伴姿態與直覺溫度的溫柔小鏡子。給出你最真實的直覺，照見屬於你的傾聽特質與心理安全感。
+            這是一面照見日常的小鏡子。最直覺的回應，最真實的聆聽特質
           </p>
         </div>
 
         <div class="flex items-center justify-center pt-4">
           <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-12 py-4 text-base">
-            <span>開始 8 題探索</span>
+            <span>開始探索</span>
             <span class="text-sm">↓</span>
           </button>
         </div>
@@ -466,15 +447,15 @@
       <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-4 sm:p-10 md:p-12 rounded-3xl space-y-6 sm:space-y-8 relative overflow-hidden border border-brand-navy/15">
 
         <!-- 頂部純淨標題欄 -->
-        <div class="flex items-center justify-between pb-3">
-          <div class="flex items-center gap-2.5">
-            <img src="listenfy_icon.png" alt="Listenfy 傾聽標誌" class="w-8 sm:w-9 h-auto flex-shrink-0 object-contain">
-            <div class="text-left">
-              <span class="font-display font-black text-lg text-brand-navy tracking-tight block">Listenfy 傾聽超能力探索</span>
-              <span class="text-xs text-brand-sub block mt-0.5">聆森 Listen・Listening Connects Us</span>
+        <div class="flex items-center justify-between pb-3 gap-2">
+          <div class="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <img src="listenfy_icon.png" alt="Listenfy 傾聽標誌" class="w-7 sm:w-9 h-auto flex-shrink-0 object-contain">
+            <div class="text-left min-w-0">
+              <span class="font-display font-black text-sm sm:text-lg text-brand-navy tracking-tight block whitespace-nowrap">Listenfy 傾聽超能力探索</span>
+              <span class="text-[11px] sm:text-xs text-brand-sub block mt-0.5 whitespace-nowrap">聆森 Listen・Listening Connects Us</span>
             </div>
           </div>
-          <div class="text-xs font-bold text-brand-navy px-3 py-1 rounded-full border border-brand-navy/15 bg-white">
+          <div class="text-[11px] sm:text-xs font-bold text-brand-navy px-2.5 sm:px-3 py-1 rounded-full border border-brand-navy/15 bg-white whitespace-nowrap flex-shrink-0">
             風格探索報告
           </div>
         </div>
@@ -506,7 +487,7 @@
               <div class="flex flex-col items-center justify-center my-auto py-4 text-center space-y-5">
                 <div class="space-y-1">
                   <h3 id="result-style-name" class="text-3xl sm:text-4xl font-serif font-black text-white tracking-tight">
-                    陪伴聆聽者
+                    陪伴型聆聽者
                   </h3>
                 </div>
 
@@ -566,15 +547,9 @@
 
       </div>
 
-      <!-- 報告分享與重測按鈕群 -->
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-2" data-html2canvas-ignore="true">
-        <button id="btn-save-image" type="button" class="btn-pill btn-pill-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
-          <span>保存風格圖卡</span>
-        </button>
-        <button id="btn-copy-result" type="button" class="btn-pill btn-pill-outline text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
-          <span>複製分析金句</span>
-        </button>
-        <button id="btn-retake-quiz" type="button" class="btn-pill btn-pill-outline text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
+      <!-- 重新探索按鈕 -->
+      <div class="flex items-center justify-center pt-2" data-html2canvas-ignore="true">
+        <button id="btn-retake-quiz" type="button" class="btn-pill btn-pill-primary text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-3.5 shadow-sm hover:shadow transition-all">
           <span>重新探索</span>
         </button>
       </div>
@@ -643,7 +618,7 @@
         id: 'Q5',
         dimension: 'N',
         station: '留白涵容',
-        text: '對方陷入低潮時，我能安於對話中的安靜與留白，相信他有自己的復原節奏，不急著替他決定方向。'
+        text: '當對方陷入低潮時，我能安於對話中的安靜與留白，相信他有自己的復原節奏，不急著替他決定方向。'
       },
       {
         id: 'Q6',
@@ -655,7 +630,7 @@
         id: 'Q7',
         dimension: 'C',
         station: '指認卡點',
-        text: '當朋友在抱怨中打轉時，比起一味安慰，我更傾向溫和但直接點出核心盲點，促使他面對卡點。'
+        text: '當朋友向我抱怨時，我傾向溫和但直接點出盲點，讓他面對困難'
       },
       {
         id: 'Q8',
@@ -678,7 +653,7 @@
     const styleProfiles = {
       A: {
         code: 'A',
-        name: '陪伴聆聽者',
+        name: '陪伴型聆聽者',
         alias: '心理安全感容器',
         quote: '極具包容感與涵容空間，提供如『空氣、水、土壤』般的在場，無條件接納當下的脆弱與混亂。',
         description: '你的內在像一片寬闊溫柔的湖泊，身邊的人在脆弱無助時，最渴望待在你的身邊。你不會急著評價對錯或下指導棋，而是全心給予專注的在場與傾聽。對你而言，陪伴的核心是讓對方知道「無論如何，我都陪著你」，這份心理安全感是生命復原最強大的沃土。',
@@ -696,7 +671,7 @@
       },
       B: {
         code: 'B',
-        name: '覺察聆聽者',
+        name: '覺察型聆聽者',
         alias: '情緒肌肉教練',
         quote: '敏銳捕捉深層感受與言外之意，溫和且堅定地指認情緒盲點，陪伴對方鍛鍊心理韌性、直視深層渴望。',
         description: '你擁有極敏銳的情緒雷達，同時具備溫暖而堅定的指引力量。你不僅能聽懂對方話語背後的委屈與壓抑，更能帶著愛與勇氣，適時遞出一把心靈探照燈，陪伴對方看清自己一直迴避的真實渴望，激發他長出直面現實的情緒肌肉。',
@@ -715,7 +690,7 @@
       },
       C: {
         code: 'C',
-        name: '探索聆聽者',
+        name: '探索型聆聽者',
         alias: '澄澈的反射鏡',
         quote: '如鏡子般透過提問與摘要梳理客觀脈絡，不強加主觀框架，完整賦權並保留對方的自主選擇。',
         description: '你像一面清澈寧靜的水鏡。當朋友帶著一團亂麻的難題走近你時，你擅長透過客觀提問、層次摘要與脈絡還原，協助他把複雜的因果關係攤開看清。你從不強硬推銷自己的解答，而是將人生的方向盤完整交還給對方，相信他能找到自己的最佳解法。',
@@ -734,7 +709,7 @@
       },
       D: {
         code: 'D',
-        name: '行動聆聽者',
+        name: '行動型聆聽者',
         alias: '堅實行動後盾',
         quote: '清晰拆解複雜現實困境，設定明確步驟與焦點，成為推動改變、陪伴落地的堅定支持。',
         description: '你是身邊人最信賴的現實導航員。面對困境，你既能共感對方的壓力，更能迅速啟動清晰的邏輯大腦，協助將龐大的難題拆解為具體可行的小目標。你的陪伴務實、溫暖且充滿力量，總能在關鍵時刻給予身邊人邁向改變的第一步勇氣。',

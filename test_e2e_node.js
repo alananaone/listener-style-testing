@@ -122,10 +122,10 @@ console.log('   [通過] 作答自動推進與上一題狀態切換正常');
 console.log('4. 驗證四大極端型態與結果渲染...');
 
 const testCases = [
-  { answers: { Q1:5, Q2:5, Q3:1, Q4:1, Q5:5, Q6:5, Q7:1, Q8:1 }, expectedStyle: 'A', expX: 18, expY: 18, name: '陪伴聆聽者' },
-  { answers: { Q1:5, Q2:5, Q3:1, Q4:1, Q5:1, Q6:1, Q7:5, Q8:5 }, expectedStyle: 'B', expX: 82, expY: 18, name: '覺察聆聽者' },
-  { answers: { Q1:1, Q2:1, Q3:5, Q4:5, Q5:5, Q6:5, Q7:1, Q8:1 }, expectedStyle: 'C', expX: 18, expY: 82, name: '探索聆聽者' },
-  { answers: { Q1:1, Q2:1, Q3:5, Q4:5, Q5:1, Q6:1, Q7:5, Q8:5 }, expectedStyle: 'D', expX: 82, expY: 82, name: '行動聆聽者' }
+  { answers: { Q1:5, Q2:5, Q3:1, Q4:1, Q5:5, Q6:5, Q7:1, Q8:1 }, expectedStyle: 'A', expX: 18, expY: 18, name: '陪伴型聆聽者' },
+  { answers: { Q1:5, Q2:5, Q3:1, Q4:1, Q5:1, Q6:1, Q7:5, Q8:5 }, expectedStyle: 'B', expX: 82, expY: 18, name: '覺察型聆聽者' },
+  { answers: { Q1:1, Q2:1, Q3:5, Q4:5, Q5:5, Q6:5, Q7:1, Q8:1 }, expectedStyle: 'C', expX: 18, expY: 82, name: '探索型聆聽者' },
+  { answers: { Q1:1, Q2:1, Q3:5, Q4:5, Q5:1, Q6:1, Q7:5, Q8:5 }, expectedStyle: 'D', expX: 82, expY: 82, name: '行動型聆聽者' }
 ];
 
 for (const tc of testCases) {
