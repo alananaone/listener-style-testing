@@ -311,6 +311,14 @@
       padding: 26px;
       box-sizing: border-box;
     }
+    @media (max-width: 640px) {
+      .flip-card-face {
+        padding: 20px 18px;
+      }
+      .flip-card-inner {
+        min-height: 460px;
+      }
+    }
     .flip-card-front {
       background-color: #262f6b;
       color: #fffaed;
@@ -469,7 +477,7 @@
     <section id="panel-result" class="story-slide min-h-screen hidden px-4 sm:px-8 py-12 sm:py-16 space-y-12">
 
       <!-- 截圖分享畫布（純淨發絲線、極簡留白，editorial 風格） -->
-      <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-6 sm:p-10 md:p-12 rounded-3xl space-y-8 relative overflow-hidden border border-brand-navy/15">
+      <div id="result-capture-target" class="max-w-3xl mx-auto bg-[#fffaed] p-4 sm:p-10 md:p-12 rounded-3xl space-y-6 sm:space-y-8 relative overflow-hidden border border-brand-navy/15">
 
         <!-- 頂部純淨標題欄 -->
         <div class="flex items-center justify-between pb-3">
@@ -582,14 +590,14 @@
       </div>
 
       <!-- 報告分享與重測按鈕群 -->
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-2" data-html2canvas-ignore="true">
-        <button id="btn-save-image" type="button" class="btn-pill btn-pill-primary text-sm px-6 py-3">
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-2" data-html2canvas-ignore="true">
+        <button id="btn-save-image" type="button" class="btn-pill btn-pill-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
           <span>保存風格圖卡</span>
         </button>
-        <button id="btn-copy-result" type="button" class="btn-pill btn-pill-outline text-sm px-6 py-3">
+        <button id="btn-copy-result" type="button" class="btn-pill btn-pill-outline text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
           <span>複製分析金句</span>
         </button>
-        <button id="btn-retake-quiz" type="button" class="btn-pill btn-pill-outline text-sm px-6 py-3">
+        <button id="btn-retake-quiz" type="button" class="btn-pill btn-pill-outline text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3">
           <span>重新探索</span>
         </button>
       </div>
@@ -940,13 +948,13 @@
       activeQuestions.forEach((q, idx) => {
         const slide = document.createElement('section');
         slide.id = `slide-q-${idx}`;
-        slide.className = 'story-slide min-h-[82vh] flex flex-col justify-center items-center px-4 sm:px-8 py-10 relative scroll-mt-16';
+        slide.className = 'story-slide min-h-[75vh] sm:min-h-[82vh] flex flex-col justify-center items-center px-3 sm:px-8 py-8 sm:py-10 relative scroll-mt-16';
 
         const qNum = String(idx + 1).padStart(2, '0');
         const currentScore = userAnswers[q.id];
 
         slide.innerHTML = `
-          <div class="w-full max-w-3xl mx-auto p-6 sm:p-10 space-y-8 text-left">
+          <div class="w-full max-w-3xl mx-auto p-4 sm:p-10 space-y-6 sm:space-y-8 text-left">
             
             <div class="flex items-center justify-between">
               <span class="font-display font-black text-xs text-brand-navy tracking-widest uppercase">
@@ -955,27 +963,27 @@
               ${idx > 0 ? `<button type="button" class="btn-prev-slide text-xs text-brand-sub hover:text-brand-navy font-bold py-1 px-2.5 rounded-full hover:bg-brand-navy/5 transition-colors" data-prev="${idx - 1}">← 上一題</button>` : ''}
             </div>
 
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy leading-relaxed py-1">
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-serif font-black text-brand-navy leading-relaxed py-1">
               ${q.text}
             </h2>
 
-            <!-- 大大的 1 2 3 4 5 橫向鋪滿選項 -->
-            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-3" role="radiogroup" aria-label="第 ${qNum} 題 5 點量表">
+            <!-- 大大的 1 2 3 4 5 橫向自適應選項 -->
+            <div class="grid grid-cols-5 gap-1.5 sm:gap-3 pt-2 sm:pt-3" role="radiogroup" aria-label="第 ${qNum} 題 5 點量表">
               ${scaleOptions.map(opt => {
                 const selected = (currentScore === opt.score);
                 return `
                   <button type="button" role="radio" aria-checked="${selected ? 'true' : 'false'}"
                     data-qid="${q.id}" data-score="${opt.score}" data-idx="${idx}"
-                    class="btn-option-card option-card-interactive group p-5 sm:p-6 flex flex-col items-center justify-between text-center ${
+                    class="btn-option-card option-card-interactive group p-2 sm:p-6 flex flex-col items-center justify-between text-center min-h-[84px] sm:min-h-[140px] ${
                       selected ? 'option-card-selected' : ''
                     }">
-                    <span class="font-display font-black text-3xl sm:text-4xl text-brand-navy group-hover:text-brand-blue transition-colors">
+                    <span class="font-display font-black text-xl sm:text-4xl text-brand-navy group-hover:text-brand-blue transition-colors">
                       ${opt.score}
                     </span>
-                    <span class="text-xs font-bold text-brand-sub group-hover:text-brand-navy mt-3 leading-snug">
+                    <span class="text-xs font-bold text-brand-sub group-hover:text-brand-navy mt-1 sm:mt-3 leading-tight">
                       ${opt.label}
                     </span>
-                    <span class="opt-indicator-dot w-2 h-2 rounded-full mt-3 transition-colors ${selected ? 'bg-brand-blue' : 'bg-brand-navy/15'}"></span>
+                    <span class="opt-indicator-dot w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full mt-1 sm:mt-3 transition-colors ${selected ? 'bg-brand-blue' : 'bg-brand-navy/15'}"></span>
                   </button>
                 `;
               }).join('')}
