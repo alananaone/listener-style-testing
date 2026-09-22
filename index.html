@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
   
+  <!-- 網站圖示（Favicon） -->
+  <link rel="icon" type="image/png" href="listenfy_icon.png">
+  <link rel="apple-touch-icon" href="listenfy_logo_full.png">
+  
   <!-- 1. html2canvas 截圖生成分享圖卡 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -351,14 +355,7 @@
   <!-- 頂部品牌導航欄 -->
   <header class="w-full max-w-4xl mx-auto px-4 sm:px-8 pt-6 pb-2 flex items-center justify-center text-center relative z-20">
     <div class="flex items-center justify-center gap-2.5 text-brand-navy">
-      <svg viewBox="0 0 120 96" class="w-8 h-auto flex-shrink-0" fill="none" aria-label="Listenfy 標誌">
-        <circle cx="48" cy="48" r="36" fill="#dce3f6" stroke="#262f6b" stroke-width="4.5" />
-        <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 0 1 60 14.1Z" fill="#ebded0" />
-        <path d="M60 14.1A36 36 0 0 1 60 81.9" stroke="#9a8c82" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.65" />
-        <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 1 0 60 14.1Z" fill="#feebc1" />
-        <circle cx="72" cy="48" r="36" fill="none" stroke="#262f6b" stroke-width="4.5" />
-        <path d="M60 26.5C64.5 37 64.5 59 60 69.5C55.5 59 55.5 37 60 26.5Z" fill="#ff7d59" stroke="#262f6b" stroke-width="4" stroke-linejoin="round" />
-      </svg>
+      <img src="listenfy_icon.png" alt="Listenfy 傾聽標誌" class="w-8 sm:w-9 h-auto flex-shrink-0 object-contain">
       <span class="font-display font-black text-sm tracking-tight">Listenfy 傾聽超能力探索</span>
     </div>
   </header>
@@ -400,8 +397,8 @@
       <div class="max-w-2xl mx-auto space-y-8">
         
         <!-- 頂部標誌（使用 1.png） -->
-        <div class="w-24 sm:w-28 h-auto mx-auto flex items-center justify-center py-1" aria-label="聆森傾聽標誌">
-          <img src="1.png" alt="Listenfy 傾聽標誌" class="w-24 sm:w-28 h-auto object-contain">
+        <div class="w-32 sm:w-40 h-auto mx-auto flex items-center justify-center py-1" aria-label="聆森傾聽標誌">
+          <img src="1.png" alt="Listenfy 傾聽標誌" class="w-32 sm:w-40 h-auto object-contain">
         </div>
 
         <div class="space-y-3">
@@ -450,15 +447,8 @@
     <!-- SLIDE LOADING：過渡加載動畫（700ms 溫和調頻） -->
     <!-- ================================================================= -->
     <section id="panel-loading" class="story-slide min-h-[75vh] hidden flex-col justify-center items-center text-center px-4 py-20 space-y-6">
-      <div class="relative w-24 h-auto mx-auto flex items-center justify-center py-2">
-        <svg viewBox="0 0 120 96" class="w-20 h-auto animate-pulse" fill="none" aria-label="Listenfy 標誌">
-          <circle cx="48" cy="48" r="36" fill="#dce3f6" stroke="#262f6b" stroke-width="3.8" />
-          <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 0 1 60 14.1Z" fill="#ebded0" />
-          <path d="M60 14.1A36 36 0 0 1 60 81.9" stroke="#9a8c82" stroke-width="3.8" stroke-linecap="round" fill="none" opacity="0.65" />
-          <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 1 0 60 14.1Z" fill="#feebc1" />
-          <circle cx="72" cy="48" r="36" fill="none" stroke="#262f6b" stroke-width="3.8" />
-          <path d="M60 26.5C64.5 37 64.5 59 60 69.5C55.5 59 55.5 37 60 26.5Z" fill="#ff7d59" stroke="#262f6b" stroke-width="3.4" stroke-linejoin="round" />
-        </svg>
+      <div class="relative w-28 sm:w-32 h-auto mx-auto flex items-center justify-center py-2">
+        <img src="1.png" alt="Listenfy 傾聽標誌" class="w-24 sm:w-28 h-auto animate-pulse object-contain">
       </div>
       
       <div class="space-y-2 max-w-md mx-auto">
@@ -478,14 +468,7 @@
         <!-- 頂部純淨標題欄 -->
         <div class="flex items-center justify-between pb-3">
           <div class="flex items-center gap-2.5">
-            <svg viewBox="0 0 120 96" class="w-7 h-auto flex-shrink-0" fill="none" aria-label="Listenfy 標誌">
-              <circle cx="48" cy="48" r="36" fill="#dce3f6" stroke="#262f6b" stroke-width="4.5" />
-              <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 0 1 60 14.1Z" fill="#ebded0" />
-              <path d="M60 14.1A36 36 0 0 1 60 81.9" stroke="#9a8c82" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.65" />
-              <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 1 0 60 14.1Z" fill="#feebc1" />
-              <circle cx="72" cy="48" r="36" fill="none" stroke="#262f6b" stroke-width="4.5" />
-              <path d="M60 26.5C64.5 37 64.5 59 60 69.5C55.5 59 55.5 37 60 26.5Z" fill="#ff7d59" stroke="#262f6b" stroke-width="4" stroke-linejoin="round" />
-            </svg>
+            <img src="listenfy_icon.png" alt="Listenfy 傾聽標誌" class="w-8 sm:w-9 h-auto flex-shrink-0 object-contain">
             <div class="text-left">
               <span class="font-display font-black text-lg text-brand-navy tracking-tight block">Listenfy 傾聽超能力探索</span>
               <span class="text-xs text-brand-sub block mt-0.5">聆森 Listen・Listening Connects Us</span>
@@ -528,15 +511,8 @@
                 </div>
 
                 <!-- 聆森官方核心 Logo 徽章（加在正中間） -->
-                <div class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-[#fffaed] shadow-md border border-brand-blue/30 mx-auto">
-                  <svg viewBox="0 0 120 96" class="w-20 h-auto" fill="none" aria-label="Listenfy 雙圓交疊傾聽標誌">
-                    <circle cx="48" cy="48" r="36" fill="#dce3f6" stroke="#262f6b" stroke-width="3.8" />
-                    <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 0 1 60 14.1Z" fill="#ebded0" />
-                    <path d="M60 14.1A36 36 0 0 1 60 81.9" stroke="#9a8c82" stroke-width="3.8" stroke-linecap="round" fill="none" opacity="0.65" />
-                    <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 1 0 60 14.1Z" fill="#feebc1" />
-                    <circle cx="72" cy="48" r="36" fill="none" stroke="#262f6b" stroke-width="3.8" />
-                    <path d="M60 26.5C64.5 37 64.5 59 60 69.5C55.5 59 55.5 37 60 26.5Z" fill="#ff7d59" stroke="#262f6b" stroke-width="3.4" stroke-linejoin="round" />
-                  </svg>
+                <div class="inline-flex items-center justify-center px-6 py-3.5 rounded-2xl bg-[#fffaed] shadow-md border border-brand-blue/30 mx-auto">
+                  <img src="1.png" alt="Listenfy 傾聽標誌" class="w-24 sm:w-28 h-auto object-contain">
                 </div>
 
                 <div class="space-y-2 max-w-xs">
