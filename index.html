@@ -399,16 +399,9 @@
     <section id="slide-hero" class="story-slide min-h-[82vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-16 sm:py-24 relative">
       <div class="max-w-2xl mx-auto space-y-8">
         
-        <!-- 頂部雙圓交疊傾聽標誌（純向量呈現） -->
-        <div class="w-20 h-auto mx-auto flex items-center justify-center py-1" aria-label="聆森雙圓交疊傾聽標誌">
-          <svg viewBox="0 0 120 96" class="w-20 h-auto" fill="none">
-            <circle cx="48" cy="48" r="36" fill="#dce3f6" stroke="#262f6b" stroke-width="3.8" />
-            <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 0 1 60 14.1Z" fill="#ebded0" />
-            <path d="M60 14.1A36 36 0 0 1 60 81.9" stroke="#9a8c82" stroke-width="3.8" stroke-linecap="round" fill="none" opacity="0.65" />
-            <path d="M60 14.1A36 36 0 0 1 60 81.9A36 36 0 1 0 60 14.1Z" fill="#feebc1" />
-            <circle cx="72" cy="48" r="36" fill="none" stroke="#262f6b" stroke-width="3.8" />
-            <path d="M60 26.5C64.5 37 64.5 59 60 69.5C55.5 59 55.5 37 60 26.5Z" fill="#ff7d59" stroke="#262f6b" stroke-width="3.4" stroke-linejoin="round" />
-          </svg>
+        <!-- 頂部標誌（使用 1.png） -->
+        <div class="w-24 sm:w-28 h-auto mx-auto flex items-center justify-center py-1" aria-label="聆森傾聽標誌">
+          <img src="1.png" alt="Listenfy 傾聽標誌" class="w-24 sm:w-28 h-auto object-contain">
         </div>
 
         <div class="space-y-3">
@@ -622,7 +615,7 @@
           完成自我覺察只是第一步。填寫學員表單，我們將把你的落點風格預先帶入，為你配對最合適的對話演練夥伴。
         </p>
         <div class="pt-2">
-          <a id="btn-go-form" href="https://forms.gle/" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-blue px-10 py-3.5 text-sm">
+          <a id="btn-go-form" href="https://forms.gle/u3N3SmLSRd4DVFq89" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-blue px-10 py-3.5 text-sm">
             填寫學員表單・踏上培力旅程
           </a>
         </div>
@@ -1286,11 +1279,11 @@
           scores: `E${metrics.E}_T${metrics.T}_N${metrics.N}_C${metrics.C}`,
           coords: `${metrics.posX.toFixed(0)}_${metrics.posY.toFixed(0)}`
         });
-        formBtn.href = `https://forms.gle/?${params.toString()}`;
+        formBtn.href = `https://forms.gle/u3N3SmLSRd4DVFq89?${params.toString()}`;
       }
 
       // 綁定一鍵複製文字（全形標點符號規範）
-      window.currentResultShareText = `【Listenfy 傾聽超能力探索】\n我的傾聽風格是：${profile.name}（${profile.alias}）\n焦點指數：情緒 ${metrics.E} 分 ｜ 事務 ${metrics.T} 分\n關係姿態：培育 ${metrics.N} 分 ｜ 督促 ${metrics.C} 分\n「${profile.quote}」\n探索你的傾聽超能力：https://forms.gle/`;
+      window.currentResultShareText = `【Listenfy 傾聽超能力探索】\n我的傾聽風格是：${profile.name}（${profile.alias}）\n焦點指數：情緒 ${metrics.E} 分 ｜ 事務 ${metrics.T} 分\n關係姿態：培育 ${metrics.N} 分 ｜ 督促 ${metrics.C} 分\n「${profile.quote}」\n探索你的傾聽超能力：https://forms.gle/u3N3SmLSRd4DVFq89`;
     }
 
     // 事件監聽綁定

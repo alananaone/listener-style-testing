@@ -105,10 +105,10 @@ def run_subagent_audit(file_path):
         scores['emotional_resonance'] -= 4
         deductions['emotional_resonance'].append("核心溫柔陪伴文案不足，無法充分傳達「我在乎你」的容器感（扣 4 分）")
 
-    # 2. 傾聽者視覺呈現（使用者明確指示：不要有圖片了，改為 /lieflat-charts 簡潔純 SVG 幾何呈現）
-    if '<img' in content:
-        scores['emotional_resonance'] -= 6
-        deductions['emotional_resonance'].append("偵測到點陣 <img> 圖片，違反「不要有那個圖片了」之極簡要求（扣 6 分）")
+    # 2. 傾聽者視覺呈現（使用者明確指示：大標題上方使用 1.png 標誌圖片，卡片使用中央雙圓交疊標誌）
+    if '1.png' not in content:
+        scores['emotional_resonance'] -= 5
+        deductions['emotional_resonance'].append("大標題上方缺少指定的 1.png 官方標誌（扣 5 分）")
     if 'svg' not in content.lower():
         scores['emotional_resonance'] -= 4
         deductions['emotional_resonance'].append("缺少純 SVG 視覺化圖騰呈現（扣 4 分）")
