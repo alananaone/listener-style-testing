@@ -77,10 +77,10 @@ def run_subagent_audit(file_path):
         scores['craft_typography'] -= penalty
         deductions['craft_typography'].append(f"出現 {len(tiny_fonts)} 處過小字級（<= 10px），影響長輩與手機閱讀易讀性（扣 {penalty} 分）")
 
-    # 3. 檢查排版字型是否豐富且分級（Noto Serif TC + Noto Sans TC + Plus Jakarta Sans）
-    if 'Noto Serif TC' not in content:
+    # 3. 檢查排版字型是否依據最新指示精準配置（Nunito + 源泉圓體 / GenSenRounded）
+    if 'Nunito' not in content or ('GenSenRounded' not in content and '源泉' not in content):
         scores['craft_typography'] -= 3
-        deductions['craft_typography'].append("缺少襯線標題字型，標題文人情感感不足（扣 3 分）")
+        deductions['craft_typography'].append("缺少指定字型（Nunito 或 源泉圓體），字體規範未落實（扣 3 分）")
 
     # 4. 檢查是否有 hover、active 與 focus-visible 三態覆蓋
     has_hover = ':hover' in content or 'hover:' in content
