@@ -407,10 +407,14 @@
           </p>
         </div>
 
-        <div class="flex items-center justify-center pt-4">
-          <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-12 py-4 text-base">
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
+          <button id="btn-start-quiz-hero" type="button" class="btn-pill btn-pill-primary px-10 py-4 text-base">
             <span>開始探索</span>
             <span class="text-sm">↓</span>
+          </button>
+          <button type="button" onclick="previewStyle('A')" class="btn-pill btn-pill-outline px-8 py-4 text-base">
+            <span>直接檢視卡片角色</span>
+            <span class="text-sm">→</span>
           </button>
         </div>
 
@@ -464,7 +468,7 @@
           </h2>
         </div>
 
-        <!-- 風格快速切換列（供預覽 4 種風格角色與翻轉效果） -->
+        <!-- 風格測試快速切換列（供即時預覽 4 種風格角色與翻轉效果） -->
         <div class="flex flex-wrap items-center justify-center gap-2 pt-1 pb-2" data-html2canvas-ignore="true">
           <span class="text-xs font-bold text-brand-sub">即時切換風格角色：</span>
           <button type="button" onclick="previewStyle('A')" class="px-3 py-1.5 rounded-full text-xs font-bold bg-white border border-brand-blue/30 text-brand-navy hover:bg-brand-blue hover:text-white transition-all shadow-sm">陪伴型</button>
@@ -1246,7 +1250,7 @@
     }
 
 
-    // 風格快速預覽助手（供即時切換預覽角色）
+    // 風格快速預覽助手（供 test.html 快速切換預覽角色）
     window.previewStyle = function(code) {
       const metricsMap = {
         A: { E: 9, T: 4, N: 9, C: 4, posX: 30, posY: 30, deltaX: -5, deltaY: -5 },
